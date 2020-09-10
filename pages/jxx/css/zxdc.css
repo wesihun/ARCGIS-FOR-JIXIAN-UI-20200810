@@ -1,0 +1,111 @@
+.dh{
+    background: transparent;
+}
+.three{
+    background: #01b6e2;
+}
+.xz1{
+        display: inline-block;
+        width: 250px;
+        height: 30px;
+        font-size: large;
+        color: #000;
+        border: 2px #9fdfed solid;
+        background:  #cfe1ef;
+        outline: none;
+        margin-top: 0.5%;
+}
+.caidan1{
+    background-color: white;
+}
+
+.xianshi{
+    overflow-y: auto;
+}
+table{
+    border-collapse:collapse;
+}
+#tudi{
+    width:100%;
+    text-align: center;
+    border: 0px;
+}
+#tudi thead tr{
+    height:46px ;
+    border: 0px;
+}
+#tudi thead tr td{
+    border: 0px;
+}
+#tudi tbody tr td{
+    text-align: center;
+}
+#tudi tbody tr{
+    height: 46px;
+    border: 0px;
+}
+#tudi tbody tr td{
+    border: 0px;
+}
+#tudi tbody tr td .num-width{
+    display: inline-block;
+    width:130px;    
+    overflow: hidden;    
+    text-overflow:ellipsis;    
+    white-space: nowrap;
+}
+#tudi tbody tr td .text-width{
+    display: inline-block;
+    width:50px;    
+    overflow: hidden;    
+    text-overflow:ellipsis;    
+    white-space: nowrap;
+}
+.xgj{
+    width:248px;
+}
+.yingyan1{
+    background: url(../img/鹰眼图.png) no-repeat;
+    position: absolute;
+    bottom:1%;
+    right:1%;
+    display:none;
+    width:20%;
+    height:25%;
+    background-size:100% 100%;
+    z-index: 9999;
+}
+.south1{
+    background: url(../img/指北针.png) no-repeat;
+    position: absolute;
+    top:1%;
+    left:1%;
+    display:none;
+    width:5%;
+    height:10%;
+    background-size:100% 100%;
+    z-index: 9999;
+}
+.bili-ruler1{
+    position: absolute;
+    bottom:3%;
+    left:1%;
+    display:none;
+    width:8%;
+    height:2%;
+    background-size:100% 100%;
+    z-index: 9999;
+}
+/* 隐藏缩放按钮 */
+#zxdc_map_div_zoom_slider {
+    display:none;
+}
+#xx_zoom_slider {
+    display:none;
+}
+#xx{
+    width:100%!important; 
+    height:100%!important; 
+    display: block!important;
+    z-index: 10001!important;
+}
