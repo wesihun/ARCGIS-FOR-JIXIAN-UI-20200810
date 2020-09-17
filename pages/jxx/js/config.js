@@ -36,7 +36,7 @@ var GEOSERVER={
 inifun()//初始化配置参数
 
 function inifun(){
-    $.ajax({url:config.ip + config.port + '/getLastUpdateDLTBService', type: 'POST', data:{}, xhrFields:{withCredentials:true}, success:function(result) {//最后一次更新的地类图斑
+    $.ajax({url:config.ip + config.port + '/getLastUpdateDLTBService', type: 'POST', data:{type:0}, xhrFields:{withCredentials:true}, success:function(result) {//最后一次更新的地类图斑服务type（0动态地图，1要素，2影像）
         ARCGISCONFIG.DLTB_Dinamic = result.serviceaddr;
     }, error:function() {alert("初始化失败！");}});
 
