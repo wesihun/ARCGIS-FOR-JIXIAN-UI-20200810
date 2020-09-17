@@ -7,7 +7,6 @@ var global_data=null, global_menue=null, global_rightMenue=null;//记录左侧�
 require(["esri/map","esri/layers/GraphicsLayer", "dojo/dom", "dojo/on","esri/layers/ArcGISDynamicMapServiceLayer", "dojo/query", "esri/tasks/FindTask", "esri/tasks/FindParameters", "esri/symbols/SimpleLineSymbol", "esri/symbols/SimpleFillSymbol", "esri/Color", "esri/graphic", "esri/tasks/QueryTask", "esri/tasks/query","esri/geometry/Point","esri/graphicsUtils","esri/layers/FeatureLayer","esri/renderers/UniqueValueRenderer","esri/dijit/OverviewMap","esri/dijit/Scalebar","esri/layers/ArcGISImageServiceLayer","esri/tasks/PrintTask", "esri/tasks/PrintTemplate", "esri/tasks/PrintParameters","esri/toolbars/draw","esri/symbols/TextSymbol","esri/symbols/Font","esri/toolbars/edit","dojo/domReady!"], init);
 
 function init(Map, GraphicsLayer,dom, on, ArcGISDynamicMapServiceLayer, query, FindTask, FindParameters,SimpleLineSymbol, SimpleFillSymbol, Color, Graphic, QueryTask, Query, Point,graphicsUtils,FeatureLayer,UniqueValueRenderer,OverviewMap,Scalebar,ArcGISImageServiceLayer,PrintTask,PrintTemplate,PrintParameters,Draw,TextSymbol,Font,Edit){
-
     var map = new Map("map_div", {logo: false });
     var layer = new ArcGISDynamicMapServiceLayer(ARCGISCONFIG.DLTB_Dinamic,{id:'dltb'});
     var layer_XZQ = new ArcGISDynamicMapServiceLayer(ARCGISCONFIG.XZQ_TAG_WITH_MAXSCALE_1_50000,{id:'xzq'});

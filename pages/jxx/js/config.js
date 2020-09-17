@@ -36,8 +36,17 @@ var GEOSERVER={
 inifun()//初始化配置参数
 
 function inifun(){
-    $.ajax({url:config.ip + config.port + '/getLastUpdateDLTBService', type: 'POST', data:{type:0}, xhrFields:{withCredentials:true}, success:function(result) {//最后一次更新的地类图斑服务type（0动态地图，1要素，2影像）
+    $.ajax({url:config.ip + config.port + '/getLastUpdateDLTBService', type: 'POST', data:{type:0}, xhrFields:{withCredentials:true},async: false, success:function(result) {//最后一次更新的地类图斑动态地图服务type（0动态地图，1要素，2影像）
         ARCGISCONFIG.DLTB_Dinamic = result.serviceaddr;
     }, error:function() {alert("初始化失败！");}});
+
+    $.ajax({url:config.ip + config.port + '/getLastUpdateDLTBService', type: 'POST', data:{type:1}, xhrFields:{withCredentials:true},async: false, success:function(result) {//最后一次更新的地类图斑要素服务type（0动态地图，1要素，2影像）
+        ARCGISCONFIG.DLTB_FEATURE = result.serviceaddr;
+    }, error:function() {alert("初始化失败！");}});
+
+    $.ajax({url:config.ip + config.port + '/getLastUpdateXZQService', type: 'POST', data:{type:5000}, xhrFields:{withCredentials:true}, async: false,success:function(result) {//1：5000行政区服务type（0动态地图，1要素，2影像,5000 1:5000缩放隐藏）
+        ARCGISCONFIG.XZQ_TAG_WITH_MAXSCALE_1_50000 = result.serviceaddr;
+    }, error:function() {alert("初始化失败！");}});
+
 
 }
