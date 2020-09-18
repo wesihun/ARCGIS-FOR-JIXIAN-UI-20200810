@@ -48,5 +48,8 @@ function inifun(){
         ARCGISCONFIG.XZQ_TAG_WITH_MAXSCALE_1_50000 = result.serviceaddr;
     }, error:function() {alert("初始化失败！");}});
 
+    $.ajax({url:config.ip + config.port + '/getAllRunImageLayerService', type: 'POST', data:{type:2}, xhrFields:{withCredentials:true}, async: false,success:function(result) {//取得最后一次更新所有启用影像服务根据服务类型type（0动态地图，1要素，2影像,5000 1:5000缩放隐藏）
+        ARCGISCONFIG.IMAGE_LAYER_1 = result[0].serviceaddr;     ARCGISCONFIG.IMAGE_LAYER_2 = result[1].serviceaddr;     ARCGISCONFIG.IMAGE_LAYER_3 = result[2].serviceaddr;
+    }, error:function() {alert("初始化失败！");}});
 
 }
