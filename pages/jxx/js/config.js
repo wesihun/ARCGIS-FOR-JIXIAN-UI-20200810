@@ -33,7 +33,7 @@ var GEOSERVER={
 }
 
 
-inifun()//初始化配置参数
+// inifun()//初始化配置参数
 
 function inifun(){
     $.ajax({url:config.ip + config.port + '/getLastUpdateDLTBService', type: 'POST', data:{type:0}, xhrFields:{withCredentials:true},async: false, success:function(result) {//最后一次更新的地类图斑动态地图服务type（0动态地图，1要素，2影像）
