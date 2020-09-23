@@ -9,6 +9,7 @@ var legendData = new Array();
 var seriesData1 = [];
 var num;
 var PHYSICSTABLE_POJO={dyResult:null,fuResult:null};//从某个物理专项表取得的对象，在时间框选择版本时候也将选中的数据赋值给次全局变量
+var CURRENTSELECTMENUE = null;
 
 $(document).ready(function(){
     dengluLocation();
@@ -83,18 +84,22 @@ $(document).ready(function(){
      });
       //点击获取id
     $('.dcd,.dcd1').bind('click',function(){
-        
+        $(".cc2").css("display","none");
         var data = JSON.parse($(this).attr('cd'));
 
         if(data.physicstable != null && data.physicstable!=""){//从某个物理表中选择最后一次的版本
-
             console.log(new QueryClass().getAllPhysicsServiceVersion(1,data.physicstable));//所有版本
-            var tablephysicstable = new QueryClass().getAllPhysicsServiceVersion(1,data.physicstable)
-            PHYSICSTABLE_POJO.fuResult = tablephysicstable[tablephysicstable.length-1]
-            tablephysicsdata = tablephysicstable
 
-            var lastValue = PHYSICSTABLE_POJO.fuResult.updatetime.slice(0,11)
-            $(".time-text").html(lastValue);
+            if(null==CURRENTSELECTMENUE || CURRENTSELECTMENUE != data.menuename){
+                var tablephysicstable = new QueryClass().getAllPhysicsServiceVersion(1,data.physicstable)
+                PHYSICSTABLE_POJO.fuResult = tablephysicstable[tablephysicstable.length-1]
+                tablephysicsdata = tablephysicstable
+                var lastValue = PHYSICSTABLE_POJO.fuResult.updatetime.slice(0,11)
+                $(".time-text").html(lastValue);
+
+                CURRENTSELECTMENUE = data.menuename;
+            }
+
 
 
             var aResult = new QueryClass().getPhysicsServiceByUpdatetime(0, data.physicstable,PHYSICSTABLE_POJO.fuResult.updatetime.slice(0,10));//根据选中的版本时间取得对应的动态地图服务
