@@ -285,8 +285,8 @@ function queryDltbByObjectID(result){//根据OBJECTID查询图斑并高亮
 
 
 function createBingReport(data, menuename, rightMenue){
-    $.ajax({url:GEOSERVER.IP + GEOSERVER.PORT + '/getSecondCategoryCode', type: 'POST', data:{"jsonMenue":JSON.stringify(data), "proviceCode":getCountryCode(rightMenue)}, xhrFields:{withCredentials:true}, success:function(result) {
-        console.log({url:GEOSERVER.IP + GEOSERVER.PORT + '/getSecondCategoryCode', type: 'POST', data:{"jsonMenue":JSON.stringify(data), "proviceCode":getCountryCode(rightMenue)}})
+    $.ajax({url:GEOSERVER.IP + GEOSERVER.PORT + '/getSecondCategoryCode', type: 'POST', data:{"jsonMenue":JSON.stringify(data), "proviceCode":getCountryCode(rightMenue),'tablename':TB_DLTBPHYSICS.fuPojo.tablename}, xhrFields:{withCredentials:true}, success:function(result) {
+        console.log({url:GEOSERVER.IP + GEOSERVER.PORT + '/getSecondCategoryCode', type: 'POST', data:{"jsonMenue":JSON.stringify(data), "proviceCode":getCountryCode(rightMenue),'tablename':TB_DLTBPHYSICS.fuPojo.tablename}})
         var legendData = "[";
         var seriesData = "["
 
@@ -327,7 +327,7 @@ function createBingReport(data, menuename, rightMenue){
 }
 
 function creatZhuReport(data, menuename, rightMenue){
-    $.ajax({url:GEOSERVER.IP + GEOSERVER.PORT + '/getSecondCategoryCode', type: 'POST', data:{"jsonMenue":JSON.stringify(data), "proviceCode":getCountryCode(rightMenue)}, xhrFields:{withCredentials:true}, success:function(result) {
+    $.ajax({url:GEOSERVER.IP + GEOSERVER.PORT + '/getSecondCategoryCode', type: 'POST', data:{"jsonMenue":JSON.stringify(data), "proviceCode":getCountryCode(rightMenue),'tablename':TB_DLTBPHYSICS.fuPojo.tablename}, xhrFields:{withCredentials:true}, success:function(result) {
         var xAxisData = "[";
         var seriesData = "[";
         if(result.length <=0) {return;}
@@ -416,7 +416,7 @@ function exportReportPDF(map, event){//导出报表按钮，根据行政区和�
         return;
     }
 
-    $.ajax({url:GEOSERVER.IP + GEOSERVER.PORT + '/exportReportPDF', type: 'POST', data:{"jsonMenue":JSON.stringify(global_data), "proviceCode":getCountryCode(global_rightMenue), "rightMenueName":global_rightMenue.name, "menuename":global_menue.menuename}, xhrFields:{withCredentials:true}, success:function(result) {
+    $.ajax({url:GEOSERVER.IP + GEOSERVER.PORT + '/exportReportPDF', type: 'POST', data:{"jsonMenue":JSON.stringify(global_data), "proviceCode":getCountryCode(global_rightMenue), "rightMenueName":global_rightMenue.name, "menuename":global_menue.menuename,'tablename':TB_DLTBPHYSICS.fuPojo.tablename}, xhrFields:{withCredentials:true}, success:function(result) {
 
         var link = document.createElement('a');//下载报表文件
         link.setAttribute("download", "");
