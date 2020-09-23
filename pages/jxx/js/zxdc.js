@@ -43,59 +43,12 @@ $(document).ready(function(){
             $("#browserone").treeview();
         }
     });
-    $.ajax({
-        url:config.ip + config.port + '/getAllDLTBServiceVersion?type=1',
-        type: 'POST',
-        async: false,
-        // xhrFields:{withCredentials:true},
-        success:function(data){
-          
-        //   TB_DLTBPHYSICS.fuPojo = data[data.length-1]
-          // console.log(TB_DLTBPHYSICS.fuPojo)
-          var lastValue = data[data.length-1].updatetime.slice(0,11)
-          $(".time-text").html(lastValue);
-          $(".time-text").click(function(){
-      
-            var display = $(".cc2").css("display");
-            if(display == "none"){
-              $(".cc2").children().remove();
-              var data1=[{id: 0, serviceaddr: null, databasename: null, tablename: null, type: 0,updatetime: "2020-09-09 00:00:00"},
-              {id: 0, serviceaddr: null, databasename: null, tablename: null, type: 0,updatetime: "2020-11-09 00:00:00"}
-                ]
-              data.forEach(e => {
-                a = e.updatetime.slice(0,11)
-                $(".cc2").append(`<ul><li class="${a}" type="${a}" style="padding:5px" id="sendtimeid"><img src="./img/timeicon.png"/>&nbsp;${a}</li></ul>`);
-                var timeObj = e
-                clicktime_2(a,timeObj)
-              })
-         
-      
-              // document.getElementsByClassName("#jxx2").innerHTML = arr
-              // console.log(document.getElementsByClassName(".filetree treeview-famfamfam cc2").innerHTML = arr)
-              // bianlitime(data,"#jxx2");
-              // $(".cc2").treeview();
-              // caidanChangeColor(".cd,.cd1");
-              // $(".cd1, .cd").click(function(){
-              // var name = $(this).html();
-              // var id = JSON.parse($(this).attr("menueid"));
-              // right = id;
-              // $(".xz").html("&nbsp;" + name);
-              // if($(this).attr("class") == "file cd"){
-              //    $(".cc2").css("display","none");
-              // };
-      
-                //左侧树，行政区导航
-      
-      
-              // });
-              $(".cc2").css("display","inline-block");
-              }else{
-              $(".cc2").css("display","none");
-             };
-           });
-        }
-      })
-      var clicktime_2 = (className,timeObj)=>{
+    
+    //滑块移动事件
+    huakuaiMove(".dcd1");
+    //点击变色事件
+    caidanChangeColor(".dcd");
+    var clicktime_2 = (className,timeObj)=>{
         $('.'+className).click(function(){
             // TB_DLTBPHYSICS.fuPojo = timeObj
             // console.log(timeObj)
@@ -108,14 +61,18 @@ $(document).ready(function(){
     
         });
     };
-    //滑块移动事件
-    huakuaiMove(".dcd1");
-    //点击变色事件
-    caidanChangeColor(".dcd");
     //点击获取id
+    var tablephysicstable = ''
     $('.dcd,.dcd1').bind('click',function(){
+        
         var data = JSON.parse($(this).attr('cd'));
-
+        if(data.physicstable){ 
+            console.log('333')
+            tablephysicstable = data.physicstable
+        }
+        
+  
+        console.log(data)
         if(data.physicstable != null && data.physicstable!=""){//从某个物理表中选择最后一次的版本
             dyResult = new QueryClass().getLastUpdatephysicstableService(0, data.physicstable);//动态地图服务（成对出现）
             fuResult = new QueryClass().getLastUpdatephysicstableService(1, data.physicstable);//要素服务（成对出现）
