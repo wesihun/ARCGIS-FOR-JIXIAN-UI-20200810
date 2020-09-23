@@ -97,11 +97,9 @@ $(document).ready(function(){
             $(".time-text").html(lastValue);
 
 
-            dyResult = new QueryClass().getLastUpdatephysicstableService(0, data.physicstable);//动态地图服务（成对出现）
-            fuResult = new QueryClass().getLastUpdatephysicstableService(1, data.physicstable);//要素服务（成对出现）
+            var aResult = new QueryClass().getPhysicsServiceByUpdatetime(0, data.physicstable,PHYSICSTABLE_POJO.fuResult.updatetime.slice(0,10));//根据选中的版本时间取得对应的动态地图服务
 
-            PHYSICSTABLE_POJO.dyResult = dyResult;
-            PHYSICSTABLE_POJO.fuResult = fuResult;
+            PHYSICSTABLE_POJO.dyResult = aResult;
 
             data.serverpath = PHYSICSTABLE_POJO.dyResult.serviceaddr;
             data.tablename = PHYSICSTABLE_POJO.fuResult.tablename;
