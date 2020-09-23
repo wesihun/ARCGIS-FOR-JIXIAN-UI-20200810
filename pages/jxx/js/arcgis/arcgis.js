@@ -220,7 +220,7 @@ function queryDLTB(data, menue, rightMenue){//点击左侧树
             
             global_data=newMenue;//全局二级分类数据
 
-            $.ajax({url:GEOSERVER.IP + GEOSERVER.PORT + '/getDLTB', type: 'POST', data:{"jsonMenue":JSON.stringify(newMenue), "proviceCode":getCountryCode(rightMenue)}, xhrFields:{withCredentials:true}, success:function(resultData){
+            $.ajax({url:GEOSERVER.IP + GEOSERVER.PORT + '/getDLTB', type: 'POST', data:{"jsonMenue":JSON.stringify(newMenue), "proviceCode":getCountryCode(rightMenue),'tablename':TB_DLTBPHYSICS.fuPojo.tablename}, xhrFields:{withCredentials:true}, success:function(resultData){
                 queryDltbByObjectID(resultData);//根据OBJECTID查询图斑并高亮
             }});
 
@@ -231,7 +231,7 @@ function queryDLTB(data, menue, rightMenue){//点击左侧树
         $(".bing").css("display","none");
 
     }else {
-        $.ajax({url:GEOSERVER.IP + GEOSERVER.PORT + '/getDLTB', type: 'POST', data:{"jsonMenue":JSON.stringify(data), "proviceCode":getCountryCode(rightMenue)}, xhrFields:{withCredentials:true}, success:function(resultData){
+        $.ajax({url:GEOSERVER.IP + GEOSERVER.PORT + '/getDLTB', type: 'POST', data:{"jsonMenue":JSON.stringify(data), "proviceCode":getCountryCode(rightMenue),'tablename':TB_DLTBPHYSICS.fuPojo.tablename}, xhrFields:{withCredentials:true}, success:function(resultData){
             queryDltbByObjectID(resultData);//根据OBJECTID查询图斑并高亮
         }});
          
