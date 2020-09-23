@@ -125,15 +125,23 @@ function caidanChangeColor(className){
 //
 //
 // var that =$(this)
-var clicktime = (className)=>{
+var clicktime = (className)=>{//时间版本框
     $('.'+className).click(function(){
         $('.'+className).css("color","blue");
-        var value1 = document.getElementsByClassName("time-text");
+        var value1 = document.getElementsByClassName("time-text");//获取值
         value1[0].innerHTML=className
         $(".cc2").css("display","none");
-        console.log(className)
+
+
+
+        alert(value1);
+
+
     });
 };
+
+
+
 //形成树菜单 无限层级
    function tree(data,className){
        for(var i=0;i<data.length;i++){

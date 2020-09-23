@@ -57,12 +57,11 @@ $("#gb-zhu").click(function(){
 });
 tishi();
 $.ajax({
-  url:config.ip + config.port + '/getAllDLTBServiceVersion?type=0',
+  url:config.ip + config.port + '/getAllDLTBServiceVersion?type=1',
   type: 'POST',
   async: false,
   // xhrFields:{withCredentials:true},
   success:function(data){
-    console.log(data)
     $(".time-text").click(function(){
       var display = $(".cc2").css("display");
       if(display == "none"){
@@ -72,7 +71,7 @@ $.ajax({
         var data1=[{id: 0, serviceaddr: null, databasename: null, tablename: null, type: 0,updatetime: "2020-09-09 00:00:00"},
         {id: 0, serviceaddr: null, databasename: null, tablename: null, type: 0,updatetime: "2020-11-09 00:00:00"}
           ]
-        data1.forEach(e => {
+        data.forEach(e => {
           a = e.updatetime.slice(0,11)
           $(".cc2").append(`<ul><li class="${a}" type="${a}" style="padding:5px" id="sendtimeid"><img src="./img/timeicon.png"/>&nbsp;${a}</li></ul>`);
           // console.log(e.id)
@@ -81,7 +80,9 @@ $.ajax({
           // xzqExtent(e.id);
           clicktime(a)
         })
-        
+
+          $(".time-text").html(<div>data[data.length-1]</div>);
+
         // document.getElementsByClassName("#jxx2").innerHTML = arr
         // console.log(document.getElementsByClassName(".filetree treeview-famfamfam cc2").innerHTML = arr)
         // bianlitime(data,"#jxx2");
