@@ -53,7 +53,7 @@ $(document).ready(function(){
 
         if(data.physicstable != null && data.physicstable!=""){//从某个物理表中选择最后一次的版本
 
-            console.log(new QueryClass().getAllPhysicsServiceVersion(1,data.physicstable));
+            console.log(new QueryClass().getAllPhysicsServiceVersion(1,data.physicstable));//所有版本
 
 
 
