@@ -123,20 +123,16 @@ function caidanChangeColor(className){
     });
 };
 //
-//
-// var that =$(this)
-var clicktime = (className)=>{//时间版本框
+//时间版本框
+var clicktime = (className,timeObj)=>{
     $('.'+className).click(function(){
+        TB_DLTBPHYSICS.fuPojo = timeObj
+        // console.log(TB_DLTBPHYSICS.fuPojo)
         $('.'+className).css("color","blue");
         var value1 = document.getElementsByClassName("time-text");//获取值
         value1[0].innerHTML=className
         $(".cc2").css("display","none");
-
-
-
         alert(value1);
-
-
     });
 };
 

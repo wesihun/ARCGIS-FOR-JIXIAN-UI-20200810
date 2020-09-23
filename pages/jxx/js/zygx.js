@@ -62,26 +62,26 @@ $.ajax({
   async: false,
   // xhrFields:{withCredentials:true},
   success:function(data){
+    
+    TB_DLTBPHYSICS.fuPojo = data[data.length-1]
+    console.log(TB_DLTBPHYSICS.fuPojo)
+    var lastValue = data[data.length-1].updatetime.slice(0,11)
+    $(".time-text").html(lastValue);
     $(".time-text").click(function(){
+
       var display = $(".cc2").css("display");
       if(display == "none"){
         $(".cc2").children().remove();
-        
-        // var arr= ''
         var data1=[{id: 0, serviceaddr: null, databasename: null, tablename: null, type: 0,updatetime: "2020-09-09 00:00:00"},
         {id: 0, serviceaddr: null, databasename: null, tablename: null, type: 0,updatetime: "2020-11-09 00:00:00"}
           ]
         data.forEach(e => {
           a = e.updatetime.slice(0,11)
           $(".cc2").append(`<ul><li class="${a}" type="${a}" style="padding:5px" id="sendtimeid"><img src="./img/timeicon.png"/>&nbsp;${a}</li></ul>`);
-          // console.log(e.id)
-          // arr+=`<div style="z-index:100000">${e.updatetime}</div>`
-          // console.log(arr)
-          // xzqExtent(e.id);
-          clicktime(a)
+          var timeObj = e
+          clicktime(a,timeObj)
         })
-
-          $(".time-text").html(<div>data[data.length-1]</div>);
+   
 
         // document.getElementsByClassName("#jxx2").innerHTML = arr
         // console.log(document.getElementsByClassName(".filetree treeview-famfamfam cc2").innerHTML = arr)
