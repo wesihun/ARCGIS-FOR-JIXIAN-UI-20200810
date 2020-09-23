@@ -122,6 +122,27 @@ function caidanChangeColor(className){
         $(`${className},.folder`).css("color","black");
     });
 };
+//
+//
+function clicktime(className){
+    console.log("222222")
+    $('.'+className).click(function(){
+        console.log("4444444")
+        // $(`${className}`).css("color","blue");
+        $('.'+className).css("color","black");
+        $(this).css("color","blue");
+        // console.log(document.getElementsByClassName(".time-text"))
+        var value1 = document.getElementsByClassName("time-text");
+        console.log(value1)
+        value1[0].innerHTML=$(this)[0].innerText
+        console.log(value1)
+
+    });
+    // $(`.folder`).click(function(){
+    //     $(`.folder`).css("color","black");
+    //     $(`${className},.folder`).css("color","black");
+    // });
+};
 //形成树菜单 无限层级
    function tree(data,className){
        for(var i=0;i<data.length;i++){
@@ -196,26 +217,26 @@ function treetjfx(data,className){
 };
    //审核员页面检测
    function shy(){
-    $.ajax({
-        url:config.ip + config.port + '/getUserInfo',
-        type: 'POST',
-        async: false,
-        xhrFields:{withCredentials:true},
-        success:function(data){
-            var glorolename = [];
-            for(var i=0;i<data.length;i++){
-                glorolename.push(data[i].role.rolename);
-            };
-            if(glorolename.indexOf("管理员") >= 0){
-                
-            }else{
-                location.href = "./welcome.html"
-            };
-        },
-        error:function(){
-            location.href = "./login.html"
-        }
-    });
+        $.ajax({
+            url:config.ip + config.port + '/getUserInfo',
+            type: 'POST',
+            async: false,
+            xhrFields:{withCredentials:true},
+            success:function(data){
+                var glorolename = [];
+                for(var i=0;i<data.length;i++){
+                    glorolename.push(data[i].role.rolename);
+                };
+                if(glorolename.indexOf("管理员") >= 0){
+                    
+                }else{
+                    location.href = "./welcome.html"
+                };
+            },
+            error:function(){
+                location.href = "./login.html"
+            }
+        });
    };
    //判断点击事件
    function PDclick(){
@@ -228,6 +249,7 @@ function treetjfx(data,className){
             var glorolename = [];
             for(var i=0;i<data.length;i++){
                 glorolename.push(data[i].role.rolename);
+                
             };
             if(glorolename.indexOf("管理员") >= 0){
                 $.ajax({
@@ -308,7 +330,7 @@ function treetjfx(data,className){
                };
                var a = glo.toString().replace(/\,/g,"");
                if(a.indexOf(fone) < 0){
-                   confirm("搜索字符不存在");    
+                   confirm("搜索字符不存在");
                };
         };
      });
@@ -894,6 +916,24 @@ $('.dcd1,.dcd').on('click',function(){
             };
         }else{
            $(`${className}`).append(`<ul><li><span class="file cd" menueid='${JSON.stringify(data[i])}'>${data[i].name}</span></li></ul>`);
+        };
+      };
+};
+ //遍历时间
+ function bianlitime(data,className){
+    for(var i=0;i<data.length;i++){
+        if(data[i].length != 0){
+           $(`${className}`).append(`<ul><li class="closed d${data[i].id}"><span class="folder cd1" menueid='${JSON.stringify(data[i])}'>${data[i].updatetime}</span></li></ul>`);
+        //    for(var j=0;j<data[i].subAdministrations.length;j++){
+        //         if(data[i].subAdministrations[j].subAdministrations != 0){
+        //            $(`.d${data[i].id}`).append(`<ul><li class="closed d${data[i].subAdministrations[j].id}"><span class="folder cd1" menueid='${JSON.stringify(data[i].subAdministrations[j])}'>${data[i].subAdministrations[j].name}</span></li></ul>`);
+        //            bianliDF(data[i].subAdministrations[j].subAdministrations,`.d${data[i].subAdministrations[j].id}`);
+        //         }else{
+        //            $(`.d${data[i].id}`).append(`<ul><li><span class="file cd" menueid='${JSON.stringify(data[i].subAdministrations[j])}'>${data[i].subAdministrations[j].name}</span></li></ul>`);
+        //         };
+        //     };
+        }else{
+           $(`${className}`).append(`<ul><li><span class="file cd" menueid='${JSON.stringify(data[i])}'>${data[i].updatetime}</span></li></ul>`);
         };
       };
 };
