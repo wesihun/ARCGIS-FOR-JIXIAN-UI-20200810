@@ -50,8 +50,8 @@ $(document).ready(function(){
     caidanChangeColor(".dcd");
     var clicktime_2 = (className,timeObj)=>{
         $('.'+className).click(function(){
-            // TB_DLTBPHYSICS.fuPojo = timeObj
-            // console.log(timeObj)
+            PHYSICSTABLE_POJO.fuResult = timeObj
+            console.log(PHYSICSTABLE_POJO.fuResult)
             $('.'+className).css("color","blue");
             var value1 = document.getElementsByClassName("time-text");//获取值
             value1[0].innerHTML=className
@@ -61,25 +61,40 @@ $(document).ready(function(){
     
         });
     };
-    //点击获取id
-    var tablephysicstable = ''
+   //时间版本选择
+    var tablephysicsdata = []
+    
+    $(".time-text").click(function(){
+        // console.log(tablephysicsdata)
+      var display = $(".cc2").css("display");
+      if(display == "none"){
+        $(".cc2").children().remove();
+        tablephysicsdata.forEach(e => {
+          a = e.updatetime.slice(0,11)
+          $(".cc2").append(`<ul><li class="${a}" type="${a}" style="padding:10px" id="sendtimeid"><img src="./img/timeicon.png"/>&nbsp;${a}</li></ul>`);
+          var timeObj = e
+          clicktime_2(a,timeObj)
+        })
+   
+        $(".cc2").css("display","inline-block");
+        }else{
+        $(".cc2").css("display","none");
+       };
+     });
+      //点击获取id
     $('.dcd,.dcd1').bind('click',function(){
         
         var data = JSON.parse($(this).attr('cd'));
-        if(data.physicstable){ 
-            console.log('333')
-            tablephysicstable = data.physicstable
-        }
-        
-  
-        console.log(data)
+
         if(data.physicstable != null && data.physicstable!=""){//从某个物理表中选择最后一次的版本
 
             console.log(new QueryClass().getAllPhysicsServiceVersion(1,data.physicstable));//所有版本
+            var tablephysicstable = new QueryClass().getAllPhysicsServiceVersion(1,data.physicstable)
+            PHYSICSTABLE_POJO.fuResult = tablephysicstable[tablephysicstable.length-1]
+            tablephysicsdata = tablephysicstable
 
-
-
-
+            var lastValue = PHYSICSTABLE_POJO.fuResult.updatetime.slice(0,11)
+            $(".time-text").html(lastValue);
 
 
             dyResult = new QueryClass().getLastUpdatephysicstableService(0, data.physicstable);//动态地图服务（成对出现）
