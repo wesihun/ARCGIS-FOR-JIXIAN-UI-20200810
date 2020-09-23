@@ -83,7 +83,7 @@ $(document).ready(function(){
      });
       //点击获取id
     $('.dcd,.dcd1').bind('click',function(){
-        
+        $(".cc2").css("display","none");
         var data = JSON.parse($(this).attr('cd'));
 
         if(data.physicstable != null && data.physicstable!=""){//从某个物理表中选择最后一次的版本
