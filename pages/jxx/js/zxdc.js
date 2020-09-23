@@ -8,6 +8,8 @@ var str;
 var legendData = new Array();
 var seriesData1 = [];
 var num;
+var PHYSICSTABLE_POJO={dyResult:null,fuResult:null};//从某个物理专项表取得的对象，在时间框选择版本时候也将选中的数据赋值给次全局变量
+
 $(document).ready(function(){
     dengluLocation();
     huoquName();
@@ -48,6 +50,22 @@ $(document).ready(function(){
     //点击获取id
     $('.dcd,.dcd1').bind('click',function(){
         var data = JSON.parse($(this).attr('cd'));
+
+        if(data.physicstable != null && data.physicstable!=""){//从某个物理表中选择最后一次的版本
+            dyResult = new QueryClass().getLastUpdatephysicstableService(0, data.physicstable);//动态地图服务（成对出现）
+            fuResult = new QueryClass().getLastUpdatephysicstableService(1, data.physicstable);//要素服务（成对出现）
+
+            PHYSICSTABLE_POJO.dyResult = dyResult;
+            PHYSICSTABLE_POJO.fuResult = fuResult;
+
+            data.serverpath = PHYSICSTABLE_POJO.dyResult.serviceaddr;
+            data.tablename = PHYSICSTABLE_POJO.fuResult.tablename;
+
+        }
+
+
+
+
         ESRIPOJO.addDynamicLayer(data);//添加图层
         GEOQUERYCLASS.setServerPath(data);//设置地理查询类
         GEOQUERYCLASS.clearGraphics(MAP);
