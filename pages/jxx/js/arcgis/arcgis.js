@@ -2,10 +2,6 @@ var globalQueryClass;
 var handdle=null;
 var totalPages;
 var global_data=null, global_menue=null, global_rightMenue=null;//记录左侧菜单和右侧菜单
-var TB_DLTBPHYSICS = {dyPojo:null, fuPojo:null};//当前选中的地类图斑对象，对应mysql tb_dltb
-
-console.log(TB_DLTBPHYSICS.fuPojo)
-
 
 require(["esri/map","esri/layers/GraphicsLayer", "dojo/dom", "dojo/on","esri/layers/ArcGISDynamicMapServiceLayer", "dojo/query", "esri/tasks/FindTask", "esri/tasks/FindParameters", "esri/symbols/SimpleLineSymbol", "esri/symbols/SimpleFillSymbol", "esri/Color", "esri/graphic", "esri/tasks/QueryTask", "esri/tasks/query","esri/geometry/Point","esri/graphicsUtils","esri/layers/FeatureLayer","esri/renderers/UniqueValueRenderer","esri/dijit/OverviewMap","esri/dijit/Scalebar","esri/layers/ArcGISImageServiceLayer","esri/tasks/PrintTask", "esri/tasks/PrintTemplate", "esri/tasks/PrintParameters","esri/toolbars/draw","esri/symbols/TextSymbol","esri/symbols/Font","esri/toolbars/edit","dojo/domReady!"], init);
 
