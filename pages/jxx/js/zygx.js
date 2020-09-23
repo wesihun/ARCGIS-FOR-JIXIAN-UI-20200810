@@ -64,7 +64,7 @@ $.ajax({
   success:function(data){
     
     TB_DLTBPHYSICS.fuPojo = data[data.length-1]
-    console.log(TB_DLTBPHYSICS.fuPojo)
+    // console.log(TB_DLTBPHYSICS.fuPojo)
     var lastValue = data[data.length-1].updatetime.slice(0,11)
     $(".time-text").html(lastValue);
     $(".time-text").click(function(){
