@@ -236,7 +236,7 @@ function queryDLTB(data, menue, rightMenue){//点击左侧树
         }});
          
         createBingReport(data, menue.menuename,rightMenue);
-        creatZhuReport(data, menue.menuename, rightMenue)
+        creatZhuReport(data, menue.menuename, rightMenue);
 
         global_data=data;//全局二级分类数据
 
