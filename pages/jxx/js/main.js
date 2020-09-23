@@ -132,7 +132,9 @@ var clicktime = (className,timeObj)=>{
         var value1 = document.getElementsByClassName("time-text");//获取值
         value1[0].innerHTML=className
         $(".cc2").css("display","none");
-        alert(value1);
+
+        new ChangeVersionClass().getCurrentDynamycLayerByFutureLayer();
+
     });
 };
 
