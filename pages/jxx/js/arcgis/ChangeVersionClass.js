@@ -8,10 +8,17 @@ function ChangeVersionClass()//选择版本类
 
 
 
-function changeLayer(){
-
+function changeLayer(toAddLayer, toRemoveLayer){
+    globalQueryClass.map.removeLayer(globalQueryClass.map.getLayer('dltb'));
+    globalQueryClass.map.addLayer(new globalQueryClass.ArcGISDynamicMapServiceLayer(TB_DLTBPHYSICS.dyPojo.serviceaddr, {id:'dltb'}),0);
 }
 
 function getCurrentDynamycLayerByFutureLayer() {
-    console.log(TB_DLTBPHYSICS.fuPojo)
+    $.ajax({url:config.ip + config.port + '/getDLTBServiceByUpdatetime', type: 'POST', data:{type:0,updatetime:TB_DLTBPHYSICS.fuPojo.updatetime.slice(0,10)}, xhrFields:{withCredentials:true},async: false, success:function(result) {//最后一次更新的地类图斑动态地图服务type（0动态地图，1要素，2影像）
+        TB_DLTBPHYSICS.dyPojo = result;
+    }, error:function() {alert("初始化动态地图失败！");}});
+
+    ARCGISCONFIG.DLTB_Dinamic = TB_DLTBPHYSICS.dyPojo.serviceaddr;//覆盖配置文件中的当前服务地址
+    ARCGISCONFIG.DLTB_FEATURE = TB_DLTBPHYSICS.fuPojo.serviceaddr;
+
 }

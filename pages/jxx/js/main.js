@@ -133,7 +133,8 @@ var clicktime = (className,timeObj)=>{
         value1[0].innerHTML=className
         $(".cc2").css("display","none");
 
-        new ChangeVersionClass().getCurrentDynamycLayerByFutureLayer();
+        new ChangeVersionClass().getCurrentDynamycLayerByFutureLayer();//改变版本逻辑类
+        new ChangeVersionClass().changeLayer();//动态添加移除图层
 
     });
 };
