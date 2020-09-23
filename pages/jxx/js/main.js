@@ -335,7 +335,9 @@ function treetjfx(data,className){
  };
  //点击查询拼接的树型菜单(统计分析)
  function queryCdtj(queryInput,queryButton,treeId,data){
+    console.log('111')
     $(`${queryButton}`).click(function(){
+        
         $(`${treeId}`).children().remove();
         treetjfx(data,`${treeId}`);
         $(`${treeId}`).treeview();

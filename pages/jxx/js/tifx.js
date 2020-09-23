@@ -27,6 +27,7 @@ $(document).ready(function(){
         success:function(data){
                //形成树菜单
               //删除数组最后一个元素
+              console.log(data)
                data.pop()
                treetjfx(data,".qtwo");
                $("#browser").treeview();

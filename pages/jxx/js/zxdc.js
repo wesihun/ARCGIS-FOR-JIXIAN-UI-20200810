@@ -83,7 +83,7 @@ $(document).ready(function(){
      });
       //点击获取id
     $('.dcd,.dcd1').bind('click',function(){
-        $(".cc2").css("display","none");
+        
         var data = JSON.parse($(this).attr('cd'));
 
         if(data.physicstable != null && data.physicstable!=""){//从某个物理表中选择最后一次的版本
@@ -96,7 +96,7 @@ $(document).ready(function(){
             var lastValue = PHYSICSTABLE_POJO.fuResult.updatetime.slice(0,11)
             $(".time-text").html(lastValue);
 
-
+            
             dyResult = new QueryClass().getLastUpdatephysicstableService(0, data.physicstable);//动态地图服务（成对出现）
             fuResult = new QueryClass().getLastUpdatephysicstableService(1, data.physicstable);//要素服务（成对出现）
 
