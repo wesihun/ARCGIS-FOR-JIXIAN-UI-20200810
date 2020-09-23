@@ -34,14 +34,14 @@
     z-index:10000;
     background-color: white;
     position: absolute;
-    width: 250px;
+    width: 200px;
     height: 37px;
     left:2%;
     top:5.5%;
 }
 .time-text{
     display: inline-block;
-    width: 248px;
+    width: 198px;
     height: 35px;
     font-size:larger;
     color: #9d9d9d;

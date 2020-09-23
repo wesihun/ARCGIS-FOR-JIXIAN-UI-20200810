@@ -124,24 +124,15 @@ function caidanChangeColor(className){
 };
 //
 //
-function clicktime(className){
-    console.log("222222")
+// var that =$(this)
+var clicktime = (className)=>{
     $('.'+className).click(function(){
-        console.log("4444444")
-        // $(`${className}`).css("color","blue");
-        $('.'+className).css("color","black");
-        $(this).css("color","blue");
-        // console.log(document.getElementsByClassName(".time-text"))
+        $('.'+className).css("color","blue");
         var value1 = document.getElementsByClassName("time-text");
-        console.log(value1)
-        value1[0].innerHTML=$(this)[0].innerText
-        console.log(value1)
-
+        value1[0].innerHTML=className
+        $(".cc2").css("display","none");
+        console.log(className)
     });
-    // $(`.folder`).click(function(){
-    //     $(`.folder`).css("color","black");
-    //     $(`${className},.folder`).css("color","black");
-    // });
 };
 //形成树菜单 无限层级
    function tree(data,className){

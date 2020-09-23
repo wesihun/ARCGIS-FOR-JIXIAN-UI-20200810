@@ -73,13 +73,15 @@ $.ajax({
         {id: 0, serviceaddr: null, databasename: null, tablename: null, type: 0,updatetime: "2020-11-09 00:00:00"}
           ]
         data1.forEach(e => {
-          $(".cc2").append(`<ul><li class="closed" style="padding:5px" id="sendtimeid"><img src="./img/timeicon.png"/>&nbsp;${e.updatetime}</li></ul>`);
+          a = e.updatetime.slice(0,11)
+          $(".cc2").append(`<ul><li class="${a}" type="${a}" style="padding:5px" id="sendtimeid"><img src="./img/timeicon.png"/>&nbsp;${a}</li></ul>`);
           // console.log(e.id)
           // arr+=`<div style="z-index:100000">${e.updatetime}</div>`
           // console.log(arr)
           // xzqExtent(e.id);
+          clicktime(a)
         })
-        clicktime("closed")
+        
         // document.getElementsByClassName("#jxx2").innerHTML = arr
         // console.log(document.getElementsByClassName(".filetree treeview-famfamfam cc2").innerHTML = arr)
         // bianlitime(data,"#jxx2");
