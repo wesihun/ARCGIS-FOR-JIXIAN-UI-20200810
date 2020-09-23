@@ -74,6 +74,14 @@ $(document).ready(function(){
   
         console.log(data)
         if(data.physicstable != null && data.physicstable!=""){//从某个物理表中选择最后一次的版本
+
+            console.log(new QueryClass().getAllPhysicsServiceVersion(1,data.physicstable));//所有版本
+
+
+
+
+
+
             dyResult = new QueryClass().getLastUpdatephysicstableService(0, data.physicstable);//动态地图服务（成对出现）
             fuResult = new QueryClass().getLastUpdatephysicstableService(1, data.physicstable);//要素服务（成对出现）
 

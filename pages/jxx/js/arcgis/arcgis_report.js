@@ -2,7 +2,7 @@ function createAllDLBingReport() {//所有地类饼形图
     var legendData = "[";
     var seriesData = "[";
 
-    $.ajax({url:GEOSERVER.IP + GEOSERVER.PORT + '/getAllDltbAreaByProvinceCode', type: 'POST', data:{"proviceCode":getCountryCode(right)}, xhrFields:{withCredentials:true}, success:function(result){
+    $.ajax({url:GEOSERVER.IP + GEOSERVER.PORT + '/getAllDltbAreaByProvinceCode', type: 'POST', data:{"proviceCode":getCountryCode(right),'tablename':TB_DLTBPHYSICS.fuPojo.tablename}, xhrFields:{withCredentials:true}, success:function(result){
         for(var i=0; i<result.length; i++){
             if(i == result.length-1){
                 legendData += "'" + result[i].dlmc + "'" + "]";
@@ -34,7 +34,7 @@ function createAllDLBingReport() {//所有地类饼形图
 }
 
 function createAllDLZhuReport() {//所有地类柱形图
-    $.ajax({url:GEOSERVER.IP + GEOSERVER.PORT + '/getAllDltbAreaByProvinceCode', type: 'POST', data:{"proviceCode":getCountryCode(right)}, xhrFields:{withCredentials:true}, success:function(result){
+    $.ajax({url:GEOSERVER.IP + GEOSERVER.PORT + '/getAllDltbAreaByProvinceCode', type: 'POST', data:{"proviceCode":getCountryCode(right),'tablename':TB_DLTBPHYSICS.fuPojo.tablename}, xhrFields:{withCredentials:true}, success:function(result){
         var xAxisData = "[";
         var seriesData = "[";
         if(result.length <=0) {return;}
