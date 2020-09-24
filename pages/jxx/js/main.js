@@ -383,7 +383,8 @@ $('.dcd1,.dcd').on('click',function(){
     //点击非根节点
     if($(this).attr('class') == 'file dcd'){//--------------------点击左侧菜单------------------------
        json = $(this).attr('cd');
-       console.log(json);
+
+
 
         function getAllPhysicsServiceVersion(type, physicstable) {//获取所有更新版本的服务版本（根据类型和物理表名）(0动态地图，1要素，2影像)
             var aResult;
@@ -401,6 +402,11 @@ $('.dcd1,.dcd').on('click',function(){
             }, error:function() {}});
             return aResult;
         }
+
+        var newjson = JSON.parse(json);
+        newjson.menuename = 'xxx';
+        json = JSON.stringify(newjson);
+        console.log(json);
 
 
 
@@ -428,7 +434,7 @@ $('.dcd1,.dcd').on('click',function(){
       $.ajax({
         url:GEOSERVER.IP + GEOSERVER.PORT + '/getAnalysisTotalRecord',
         type: 'POST',
-        data:{jsonTree:$(this).attr('cd')},
+        data:{jsonTree:json},
         xhrFields:{withCredentials:true},
         success:function(data){
             bing("#bing1",bing1,title+'数量','数量',['总数'],[{value:data.result,name:'总数',itemStyle:{color:'#FAD03E'}}]);
@@ -438,7 +444,7 @@ $('.dcd1,.dcd').on('click',function(){
       $.ajax({
           url:GEOSERVER.IP + GEOSERVER.PORT + '/getAnalysisTotalArea',
           type: 'POST',
-          data:{jsonTree:$(this).attr('cd')},
+          data:{jsonTree:json},
           xhrFields:{withCredentials:true},
           success:function(data){
               bing("#bing2",bing2,title+'面积','面积',['总面积'],[{value:data.result,name:'总面积',itemStyle:{color:'#5cd1fa'}}]);
@@ -448,7 +454,7 @@ $('.dcd1,.dcd').on('click',function(){
       $.ajax({
         url:GEOSERVER.IP + GEOSERVER.PORT + '/getAnalysisTotalRecord',
         type: 'POST',
-        data:{jsonTree:$(this).attr('cd')},
+        data:{jsonTree:json},
         xhrFields:{withCredentials:true},
         success:function(data){
             //获取折线图数据,生成折线图
