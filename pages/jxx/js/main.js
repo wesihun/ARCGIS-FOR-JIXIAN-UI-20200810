@@ -377,7 +377,6 @@ function treetjfx(data,className){
         var value1 = document.getElementsByClassName("time-text1");//获取值
         value1[0].innerHTML=className
         $(".cc2").css("display","none");
-
         // new ChangeVersionClass().getCurrentDynamycLayerByFutureLayer();
 
     });
@@ -390,13 +389,16 @@ function treetjfx(data,className){
     var display = $(".cc2").css("display");
     if(display == "none"){
       $(".cc2").children().remove();
-
+    if(aResult){
       aResult.forEach(e => {
         a = e.updatetime.slice(0,11)
-        $(".cc2").append(`<ul><li class="${a}" type="${a}" style="padding:5px" id="sendtimeid"><img src="./img/timeicon.png"/>&nbsp;${a}</li></ul>`);
+        $(".cc2").append(`<ul><li class="${a}" type="${a}" style="padding:10px" id="sendtimeid"><img src="./img/timeicon.png"/>&nbsp;${a}</li></ul>`);
         var timeObj = e
         clicktime_2(a,timeObj)
       })
+    }else{
+        // console.log('text')
+    }
       $(".cc2").css("display","inline-block");
       }else{
         
