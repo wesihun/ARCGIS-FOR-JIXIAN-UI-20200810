@@ -383,6 +383,27 @@ function treetjfx(data,className){
     });
 };
  //click tree 创建table
+ var aResult;
+ $(".time-text").click(function(){
+
+    // var arr = aResult
+    var display = $(".cc2").css("display");
+    if(display == "none"){
+      $(".cc2").children().remove();
+
+      aResult.forEach(e => {
+        a = e.updatetime.slice(0,11)
+        $(".cc2").append(`<ul><li class="${a}" type="${a}" style="padding:5px" id="sendtimeid"><img src="./img/timeicon.png"/>&nbsp;${a}</li></ul>`);
+        var timeObj = e
+        clicktime_2(a,timeObj)
+      })
+      $(".cc2").css("display","inline-block");
+      }else{
+        
+        $(".cc2").css("display","none");
+     };
+    //  aResult = []
+   });
  function clitree(){
 
     //生成折线图
@@ -401,9 +422,9 @@ $('.dcd1,.dcd').on('click',function(){
     if($(this).attr('class') == 'file dcd'){//--------------------点击左侧菜单------------------------
        json = $(this).attr('cd');
         var newjson = JSON.parse(json);
-
+       
         if(null==CURRENTSELECTMENUE || CURRENTSELECTMENUE != newjson.menuename) {//判断是否每次点击的是同一个菜单（只有不同菜单才会去读取所有版本）
-            var aResult;
+            
             getAllPhysicsServiceVersion(1,JSON.parse(json).physicstable)
             function getAllPhysicsServiceVersion(type, physicstable) {//获取所有更新版本的服务版本（根据类型和物理表名）(0动态地图，1要素，2影像)
                 $.ajax({url:config.ip + config.port + '/getAllPhysicsServiceVersion', type: 'POST', data:{type:type,physicstable:physicstable }, xhrFields:{withCredentials:true},async: false, success:function(result) {//最后一次更新的地类图斑动态地图服务type（0动态地图，1要素，2影像）
@@ -412,7 +433,7 @@ $('.dcd1,.dcd').on('click',function(){
                 PHYSICSTABLE_POJO.fuResult = aResult[aResult.length-1]
                 var lastValue = aResult[aResult.length-1].updatetime.slice(0,11)
                 $(".time-text").html(lastValue);
-                return aResult;
+                // return aResult;
             }
 
             CURRENTSELECTMENUE = newjson.menuename;
@@ -420,21 +441,6 @@ $('.dcd1,.dcd').on('click',function(){
 
 
 
-        $(".time-text").click(function(){
-            var display = $(".cc2").css("display");
-            if(display == "none"){
-              $(".cc2").children().remove();
-              aResult.forEach(e => {
-                a = e.updatetime.slice(0,11)
-                $(".cc2").append(`<ul><li class="${a}" type="${a}" style="padding:5px" id="sendtimeid"><img src="./img/timeicon.png"/>&nbsp;${a}</li></ul>`);
-                var timeObj = e
-                clicktime_2(a,timeObj)
-              })
-              $(".cc2").css("display","inline-block");
-              }else{
-                console.log('关闭')
-             };
-           });
 
 
 
