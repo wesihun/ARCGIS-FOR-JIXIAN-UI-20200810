@@ -1,3 +1,6 @@
+var PHYSICSTABLE_POJO={dyResult:null,fuResult:null};//从某个物理专项表取得的对象，在时间框选择版本时候也将选中的数据赋值给次全局变量
+var CURRENTSELECTMENUE = null;
+
 // 是否登录检测
 function jiancelogin(){
     var call;
@@ -383,9 +386,36 @@ $('.dcd1,.dcd').on('click',function(){
       $('#bing2').css('display','inline-block');
     };
     //点击非根节点
-    if($(this).attr('class') == 'file dcd'){
+    if($(this).attr('class') == 'file dcd'){//--------------------点击左侧菜单------------------------
        json = $(this).attr('cd');
-       nameche = $(this).html(); 
+       console.log(json);
+
+        function getAllPhysicsServiceVersion(type, physicstable) {//获取所有更新版本的服务版本（根据类型和物理表名）(0动态地图，1要素，2影像)
+            var aResult;
+            $.ajax({url:config.ip + config.port + '/getAllPhysicsServiceVersion', type: 'POST', data:{type:type,physicstable:physicstable }, xhrFields:{withCredentials:true},async: false, success:function(result) {//最后一次更新的地类图斑动态地图服务type（0动态地图，1要素，2影像）
+                aResult =  result;
+            }, error:function() {}});
+            return aResult;
+        }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+       nameche = $(this).html();
       //clear
       $('#tj thead tr').children().remove();
       str = '';

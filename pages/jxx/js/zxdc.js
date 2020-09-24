@@ -88,9 +88,8 @@ $(document).ready(function(){
         var data = JSON.parse($(this).attr('cd'));
 
         if(data.physicstable != null && data.physicstable!=""){//从某个物理表中选择最后一次的版本
-            console.log(new QueryClass().getAllPhysicsServiceVersion(1,data.physicstable));//所有版本
 
-            if(null==CURRENTSELECTMENUE || CURRENTSELECTMENUE != data.menuename){
+            if(null==CURRENTSELECTMENUE || CURRENTSELECTMENUE != data.menuename){//判断是否每次点击的是同一个菜单（只有不同菜单才会去读取所有版本）
                 var tablephysicstable = new QueryClass().getAllPhysicsServiceVersion(1,data.physicstable)
                 PHYSICSTABLE_POJO.fuResult = tablephysicstable[tablephysicstable.length-1]
                 tablephysicsdata = tablephysicstable
