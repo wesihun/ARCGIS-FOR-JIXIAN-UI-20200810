@@ -400,22 +400,25 @@ $('.dcd1,.dcd').on('click',function(){
     //点击非根节点
     if($(this).attr('class') == 'file dcd'){//--------------------点击左侧菜单------------------------
        json = $(this).attr('cd');
-    //    console.log(JSON.parse(json));
-    var aResult;
-       getAllPhysicsServiceVersion(1,JSON.parse(json).physicstable)
-        function getAllPhysicsServiceVersion(type, physicstable) {//获取所有更新版本的服务版本（根据类型和物理表名）(0动态地图，1要素，2影像)
+        var newjson = JSON.parse(json);
 
-            $.ajax({url:config.ip + config.port + '/getAllPhysicsServiceVersion', type: 'POST', data:{type:type,physicstable:physicstable }, xhrFields:{withCredentials:true},async: false, success:function(result) {//最后一次更新的地类图斑动态地图服务type（0动态地图，1要素，2影像）
-                aResult =  result;
-            }, error:function() {}});
-            // console.log(aResult)
-            PHYSICSTABLE_POJO.fuResult = aResult[aResult.length-1]
-            // console.log(PHYSICSTABLE_POJO.fuResult)
-            var lastValue = aResult[aResult.length-1].updatetime.slice(0,11)
-            $(".time-text").html(lastValue);
+        if(null==CURRENTSELECTMENUE || CURRENTSELECTMENUE != newjson.menuename) {//判断是否每次点击的是同一个菜单（只有不同菜单才会去读取所有版本）
+            var aResult;
+            getAllPhysicsServiceVersion(1,JSON.parse(json).physicstable)
+            function getAllPhysicsServiceVersion(type, physicstable) {//获取所有更新版本的服务版本（根据类型和物理表名）(0动态地图，1要素，2影像)
+                $.ajax({url:config.ip + config.port + '/getAllPhysicsServiceVersion', type: 'POST', data:{type:type,physicstable:physicstable }, xhrFields:{withCredentials:true},async: false, success:function(result) {//最后一次更新的地类图斑动态地图服务type（0动态地图，1要素，2影像）
+                    aResult =  result;
+                }, error:function() {}});
+                PHYSICSTABLE_POJO.fuResult = aResult[aResult.length-1]
+                var lastValue = aResult[aResult.length-1].updatetime.slice(0,11)
+                $(".time-text").html(lastValue);
+                return aResult;
+            }
 
-            return aResult;
+            CURRENTSELECTMENUE = newjson.menuename;
         }
+
+
 
         $(".time-text").click(function(){
             var display = $(".cc2").css("display");
@@ -433,18 +436,21 @@ $('.dcd1,.dcd').on('click',function(){
              };
            });
 
-        function getPhysicsServiceByUpdatetime(type, physicstable,updatetime){//根据更新时间取得某服务（根据类型和物理表名）(0动态地图，1要素，2影像)
-            var aResult;
-            $.ajax({url:config.ip + config.port + '/getPhysicsServiceByUpdatetime', type: 'POST', data:{type:type,physicstable:physicstable,updatetime:updatetime }, xhrFields:{withCredentials:true},async: false, success:function(result) {//最后一次更新的地类图斑动态地图服务type（0动态地图，1要素，2影像）
-                aResult =  result;
-            }, error:function() {}});
-            return aResult;
-        }
 
-        var newjson = JSON.parse(json);
-        newjson.menuename = 'xxx';
+
+        // var aResult = getPhysicsServiceByUpdatetime(0,newjson.physicstable,PHYSICSTABLE_POJO.fuResult.updatetime);
+        // function getPhysicsServiceByUpdatetime(type, physicstable,updatetime){//根据更新时间取得某服务（根据类型和物理表名）(0动态地图，1要素，2影像)
+        //     var aResult;
+        //     $.ajax({url:config.ip + config.port + '/getPhysicsServiceByUpdatetime', type: 'POST', data:{type:type,physicstable:physicstable,updatetime:updatetime }, xhrFields:{withCredentials:true},async: false, success:function(result) {//最后一次更新的地类图斑动态地图服务type（0动态地图，1要素，2影像）
+        //         aResult =  result;
+        //     }, error:function() {}});
+        //     return aResult;
+        // }
+        // PHYSICSTABLE_POJO.dyResult = aResult;
+
+
+        newjson.tablename = PHYSICSTABLE_POJO.fuResult.tablename;
         json = JSON.stringify(newjson);
-        console.log(json);
 
 
 
