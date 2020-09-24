@@ -374,7 +374,7 @@ function treetjfx(data,className){
         PHYSICSTABLE_POJO.fuResult = timeObj
         // console.log(timeObj)
         $('.'+className).css("color","blue");
-        var value1 = document.getElementsByClassName("time-text");//获取值
+        var value1 = document.getElementsByClassName("time-text1");//获取值
         value1[0].innerHTML=className
         $(".cc2").css("display","none");
 
@@ -384,7 +384,7 @@ function treetjfx(data,className){
 };
  //click tree 创建table
  var aResult;
- $(".time-text").click(function(){
+ $(".time-text1").click(function(){
 
     // var arr = aResult
     var display = $(".cc2").css("display");
@@ -432,7 +432,7 @@ $('.dcd1,.dcd').on('click',function(){
                 }, error:function() {}});
                 PHYSICSTABLE_POJO.fuResult = aResult[aResult.length-1]
                 var lastValue = aResult[aResult.length-1].updatetime.slice(0,11)
-                $(".time-text").html(lastValue);
+                $(".time-text1").html(lastValue);
                 // return aResult;
             }
 
