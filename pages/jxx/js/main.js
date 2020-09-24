@@ -394,7 +394,13 @@ $('.dcd1,.dcd').on('click',function(){
         }
 
 
-
+        function getPhysicsServiceByUpdatetime(type, physicstable,updatetime){//根据更新时间取得某服务（根据类型和物理表名）(0动态地图，1要素，2影像)
+            var aResult;
+            $.ajax({url:config.ip + config.port + '/getPhysicsServiceByUpdatetime', type: 'POST', data:{type:type,physicstable:physicstable,updatetime:updatetime }, xhrFields:{withCredentials:true},async: false, success:function(result) {//最后一次更新的地类图斑动态地图服务type（0动态地图，1要素，2影像）
+                aResult =  result;
+            }, error:function() {}});
+            return aResult;
+        }
 
 
 
