@@ -108,7 +108,6 @@ function huoquName(){
 //滑块移动事件
 function huakuaiMove(IdName){
     $(`${IdName}`).click(function(){
-        console.log('eeeeeeee')
         var height = $(this).position().top;
         $(".wone").animate({
             marginTop: height
@@ -251,7 +250,7 @@ function treetjfx(data,className){
             var glorolename = [];
             for(var i=0;i<data.length;i++){
                 glorolename.push(data[i].role.rolename);
-                
+
             };
             if(glorolename.indexOf("管理员") >= 0){
                 $.ajax({
@@ -370,6 +369,19 @@ function treetjfx(data,className){
         };
      });
  };
+ var clicktime_2 = (className,timeObj)=>{
+    $('.'+className).click(function(){
+        PHYSICSTABLE_POJO.fuResult = timeObj
+        // console.log(timeObj)
+        $('.'+className).css("color","blue");
+        var value1 = document.getElementsByClassName("time-text");//获取值
+        value1[0].innerHTML=className
+        $(".cc2").css("display","none");
+
+        // new ChangeVersionClass().getCurrentDynamycLayerByFutureLayer();
+
+    });
+};
  //click tree 创建table
  function clitree(){
     
@@ -379,7 +391,7 @@ function treetjfx(data,className){
     bing("#bing1",bing1,'数量','数量',['总数'],[{value:0,name:'总数',itemStyle:{color:'#FAD03E'}}]);
     bing("#bing2",bing2,'面积','面积',['总面积'],[{value:0,name:'总面积',itemStyle:{color:'#5cd1fa'}}]);
 $('.dcd1,.dcd').on('click',function(){
-    console.log($(this).attr('cd'))
+    $(".cc2").css("display","none");
     if($(this).attr('typeid') =='polyline'){
       $('#bing2').css('display','none');
     }else{
@@ -388,16 +400,38 @@ $('.dcd1,.dcd').on('click',function(){
     //点击非根节点
     if($(this).attr('class') == 'file dcd'){//--------------------点击左侧菜单------------------------
        json = $(this).attr('cd');
-       console.log(json);
-
+    //    console.log(JSON.parse(json));
+    var aResult;
+       getAllPhysicsServiceVersion(1,JSON.parse(json).physicstable)
         function getAllPhysicsServiceVersion(type, physicstable) {//获取所有更新版本的服务版本（根据类型和物理表名）(0动态地图，1要素，2影像)
-            var aResult;
+            
             $.ajax({url:config.ip + config.port + '/getAllPhysicsServiceVersion', type: 'POST', data:{type:type,physicstable:physicstable }, xhrFields:{withCredentials:true},async: false, success:function(result) {//最后一次更新的地类图斑动态地图服务type（0动态地图，1要素，2影像）
                 aResult =  result;
             }, error:function() {}});
+            // console.log(aResult)
+            PHYSICSTABLE_POJO.fuResult = aResult[aResult.length-1]
+            // console.log(PHYSICSTABLE_POJO.fuResult)
+            var lastValue = aResult[aResult.length-1].updatetime.slice(0,11)
+            $(".time-text").html(lastValue);
+ 
             return aResult;
         }
 
+        $(".time-text").click(function(){
+            var display = $(".cc2").css("display");
+            if(display == "none"){
+              $(".cc2").children().remove();
+              aResult.forEach(e => {
+                a = e.updatetime.slice(0,11)
+                $(".cc2").append(`<ul><li class="${a}" type="${a}" style="padding:5px" id="sendtimeid"><img src="./img/timeicon.png"/>&nbsp;${a}</li></ul>`);
+                var timeObj = e
+                clicktime_2(a,timeObj)
+              })
+              $(".cc2").css("display","inline-block");
+              }else{
+                console.log('关闭')
+             };
+           });
 
 
 
