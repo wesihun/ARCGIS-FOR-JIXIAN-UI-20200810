@@ -98,7 +98,7 @@ $(document).ready(function(){
           var value1 = document.getElementsByClassName("time-text");//获取值
           value1[0].innerHTML=className
           $(".cc2").css("display","none");
-  
+
           // new ChangeVersionClass().getCurrentDynamycLayerByFutureLayer();
   
       });
