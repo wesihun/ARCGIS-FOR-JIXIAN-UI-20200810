@@ -60,8 +60,10 @@
 		applyClasses: function(settings, toggler) {
 			// TODO use event delegation
 			this.filter(":has(>ul):not(:has(>a))").find(">span").unbind("click.treeview").bind("click.treeview", function(event) {
+				console.log('rrrrrrrr')
 				// don't handle click events on children, eg. checkboxes
 				if ( this == event.target )
+				console.log('jjjjjjjj')
 					toggler.apply($(this).next());
 			}).add( $("a", this) ).hoverClass();
 
@@ -100,6 +102,7 @@
 
 			if ( settings.toggle ) {
 				var callback = settings.toggle;
+				console.log('[oooooooooooo ')
 				settings.toggle = function() {
 					return callback.apply($(this).parent()[0], arguments);
 				};

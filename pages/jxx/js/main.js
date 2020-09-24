@@ -105,6 +105,7 @@ function huoquName(){
 //滑块移动事件
 function huakuaiMove(IdName){
     $(`${IdName}`).click(function(){
+        console.log('eeeeeeee')
         var height = $(this).position().top;
         $(".wone").animate({
             marginTop: height
@@ -335,7 +336,7 @@ function treetjfx(data,className){
  };
  //点击查询拼接的树型菜单(统计分析)
  function queryCdtj(queryInput,queryButton,treeId,data){
-    console.log('111')
+    
     $(`${queryButton}`).click(function(){
         
         $(`${treeId}`).children().remove();
@@ -368,12 +369,14 @@ function treetjfx(data,className){
  };
  //click tree 创建table
  function clitree(){
+    
     //生成折线图
     zhexian("",[0,0,0,0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0,0,0,0]);
     //生成饼形图
     bing("#bing1",bing1,'数量','数量',['总数'],[{value:0,name:'总数',itemStyle:{color:'#FAD03E'}}]);
     bing("#bing2",bing2,'面积','面积',['总面积'],[{value:0,name:'总面积',itemStyle:{color:'#5cd1fa'}}]);
 $('.dcd1,.dcd').on('click',function(){
+    console.log($(this).attr('cd'))
     if($(this).attr('typeid') =='polyline'){
       $('#bing2').css('display','none');
     }else{
