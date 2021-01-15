@@ -185,27 +185,57 @@ function messageBox(feature) {//信息框
     $(".lone").children().remove();
 
     var divElement = "";
-    divElement += "<div>" + "要素代码：" + feature.attributes.YSDM +"</div>"
-    divElement += "<div>" + "图斑编号：" + feature.attributes.TBBH +"</div>"
-    divElement += "<div>" + "地类编码：" + feature.attributes.DLBM +"</div>"
-    divElement += "<div>" + "地类名称：" + feature.attributes.DLMC +"</div>"
-    divElement += "<div>" + "权属性质：" + feature.attributes.QSXZ +"</div>"
-    divElement += "<div>" + "权属单位代码：" + feature.attributes.QSDWDM +"</div>"
-    divElement += "<div>" + "权属单位名称：" + feature.attributes.QSDWMC +"</div>"
-    divElement += "<div>" + "图斑面积：" + feature.attributes.TBMJ +"</div>"
-    divElement += "<div>" + "扣除地类编码：" + feature.attributes.KCDLBM  +"</div>"
-    divElement += "<div>" + "扣除地类系数：" + feature.attributes.KCXS   +"</div>"
-    divElement += "<div>" + "扣除地类面积：" + feature.attributes.KCMJ    +"</div>"
-    divElement += "<div>" + " 图斑地类面积：" + feature.attributes.TBDLMJ    +"</div>"
-    divElement += "<div>" + "耕地坡度级别：" + feature.attributes.GDPDJB    +"</div>"
-    //divElement += "<div>" + "耕地类型：" + feature.attributes.GDLX    +"</div>"
-    //divElement += "<div>" + "线状地物宽度：" + feature.attributes.XZDWKD     +"</div>"
-    divElement += "<div>" + "图斑细化代码：" + feature.attributes.TBXHDM     +"</div>"
-    divElement += "<div>" + "图斑细化名称：" + feature.attributes.TBXHMC     +"</div>"
-    divElement += "<div>" + "种植属性代码：" + feature.attributes.ZZSXDM     +"</div>"
-    divElement += "<div>" + "种植属性名称：" + feature.attributes.ZZSXMC     +"</div>"
-    divElement += "<div>" + "耕地等别：" + feature.attributes.GDDB     +"</div>"
-    divElement += "<div>" + "数据年份：" + feature.attributes.SJNF    +"</div>"
+
+    // if(/^[A-Z]+$/.test( feature.attributes.DLMC )){//大写
+    if(feature.attributes.DLMC != null && feature.attributes.DLMC != 'undefined'){//大写
+        divElement += "<div>" + "要素代码：" + feature.attributes.YSDM +"</div>"
+        divElement += "<div>" + "图斑编号：" + feature.attributes.TBBH +"</div>"
+        divElement += "<div>" + "地类编码：" + feature.attributes.DLBM +"</div>"
+        divElement += "<div>" + "地类名称：" + feature.attributes.DLMC +"</div>"
+        divElement += "<div>" + "权属性质：" + feature.attributes.QSXZ +"</div>"
+        divElement += "<div>" + "权属单位代码：" + feature.attributes.QSDWDM +"</div>"
+        divElement += "<div>" + "权属单位名称：" + feature.attributes.QSDWMC +"</div>"
+        divElement += "<div>" + "图斑面积：" + feature.attributes.TBMJ +"</div>"
+        divElement += "<div>" + "扣除地类编码：" + feature.attributes.KCDLBM  +"</div>"
+        divElement += "<div>" + "扣除地类系数：" + feature.attributes.KCXS   +"</div>"
+        divElement += "<div>" + "扣除地类面积：" + feature.attributes.KCMJ    +"</div>"
+        divElement += "<div>" + " 图斑地类面积：" + feature.attributes.TBDLMJ    +"</div>"
+        divElement += "<div>" + "耕地坡度级别：" + feature.attributes.GDPDJB    +"</div>"
+        //divElement += "<div>" + "耕地类型：" + feature.attributes.GDLX    +"</div>"
+        //divElement += "<div>" + "线状地物宽度：" + feature.attributes.XZDWKD     +"</div>"
+        divElement += "<div>" + "图斑细化代码：" + feature.attributes.TBXHDM     +"</div>"
+        divElement += "<div>" + "图斑细化名称：" + feature.attributes.TBXHMC     +"</div>"
+        divElement += "<div>" + "种植属性代码：" + feature.attributes.ZZSXDM     +"</div>"
+        divElement += "<div>" + "种植属性名称：" + feature.attributes.ZZSXMC     +"</div>"
+        divElement += "<div>" + "耕地等别：" + feature.attributes.GDDB     +"</div>"
+        divElement += "<div>" + "数据年份：" + feature.attributes.SJNF    +"</div>"
+    }
+    else {
+        divElement += "<div>" + "要素代码：" + feature.attributes.ysdm +"</div>"
+        divElement += "<div>" + "图斑编号：" + feature.attributes.tbbh +"</div>"
+        divElement += "<div>" + "地类编码：" + feature.attributes.dlbm +"</div>"
+        divElement += "<div>" + "地类名称：" + feature.attributes.dlmc +"</div>"
+        divElement += "<div>" + "权属性质：" + feature.attributes.qsxz +"</div>"
+        divElement += "<div>" + "权属单位代码：" + feature.attributes.qsdwdm +"</div>"
+        divElement += "<div>" + "权属单位名称：" + feature.attributes.qsdwmc +"</div>"
+        divElement += "<div>" + "图斑面积：" + feature.attributes.tbmj +"</div>"
+        divElement += "<div>" + "扣除地类编码：" + feature.attributes.kcdlbm  +"</div>"
+        divElement += "<div>" + "扣除地类系数：" + feature.attributes.ecxs   +"</div>"
+        divElement += "<div>" + "扣除地类面积：" + feature.attributes.ecmj    +"</div>"
+        divElement += "<div>" + " 图斑地类面积：" + feature.attributes.tbdlmj    +"</div>"
+        divElement += "<div>" + "耕地坡度级别：" + feature.attributes.gdpdjb    +"</div>"
+        //divElement += "<div>" + "耕地类型：" + feature.attributes.GDLX    +"</div>"
+        //divElement += "<div>" + "线状地物宽度：" + feature.attributes.XZDWKD     +"</div>"
+        divElement += "<div>" + "图斑细化代码：" + feature.attributes.tbxhdm     +"</div>"
+        divElement += "<div>" + "图斑细化名称：" + feature.attributes.tbxhmc     +"</div>"
+        divElement += "<div>" + "种植属性代码：" + feature.attributes.zzsxdm     +"</div>"
+        divElement += "<div>" + "种植属性名称：" + feature.attributes.zzsxmc     +"</div>"
+        divElement += "<div>" + "耕地等别：" + feature.attributes.gddb     +"</div>"
+        divElement += "<div>" + "数据年份：" + feature.attributes.sjnf    +"</div>"
+    }
+
+
+
 
     $(".lone").append(divElement);
     $(".mone").html(feature.attributes.DLMC);
