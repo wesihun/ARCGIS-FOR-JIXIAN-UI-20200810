@@ -7,6 +7,7 @@ function jiancelogin(){
         async: false,
         xhrFields:{withCredentials:true},
         success:function(data){
+        	console.log(data.length)
             if(data.length > 0){call = true};
             if(data.length <= 0){call = false};
         },

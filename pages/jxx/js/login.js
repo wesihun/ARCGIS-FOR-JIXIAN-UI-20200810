@@ -153,7 +153,8 @@ $("#input").click(function () {
        xhrFields:{withCredentials:true},
        success:function (data) {
            if(data.result == 'success'){
-            window.location.href = "./go.html";
+           	console.log('2222222222')
+            location.href = "./go.html";
            }
            else{alert("用户名密码错误!!!")};
        }

@@ -1,5 +1,5 @@
 var zhanghu1;
-$(document).ready(function(){
+//$(document).ready(function(){
 //获取userid
 $.ajax({
   url:config.ip + config.port + '/getUserInfo',
@@ -22,6 +22,7 @@ $.ajax({
     data:{userid:zhanghu1,content:'登入系统'}
 });
 setTimeout(function () {
-    window.location.href = "./welcome.html";
+	console.log('123')
+    location.href = "./welcome.html";
 },500);
-});
+//});

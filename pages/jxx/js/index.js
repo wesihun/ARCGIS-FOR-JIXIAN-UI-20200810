@@ -39,7 +39,9 @@ $("#login1").click(function () {
 });
 $("#time1").html(newTime());
 $(".control").click(function(){
+	
     if(jiancelogin()){
+    	
         if(this.className == "control one"){
             $.ajax({
                 url:config.newip + config.newport + '/arcgis/Other/PostLog',
@@ -74,6 +76,7 @@ $(".control").click(function(){
             window.location.href = "wdgx.html";
         }
     }else{
+    	console.log('111')
         window.location.href = "./login.html";
     }    
 });
