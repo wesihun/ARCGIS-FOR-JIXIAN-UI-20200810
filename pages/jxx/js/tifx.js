@@ -26,6 +26,9 @@ $(document).ready(function(){
         xhrFields:{withCredentials:true},
         success:function(data){
                //形成树菜单
+              //删除数组最后一个元素
+              // console.log(data)
+               data.pop()
                treetjfx(data,".qtwo");
                $("#browser").treeview();
                 //滑块移动事件
@@ -36,6 +39,8 @@ $(document).ready(function(){
                queryCdtj(".fthree",".sthree","#browser",data);
         }
     });
+  
+
     //地区信息
     $.ajax({
       url:config.ip + config.port + '/getAdministration',

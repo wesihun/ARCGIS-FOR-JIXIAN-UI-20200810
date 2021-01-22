@@ -50,7 +50,8 @@ function setExtentFun(map, geometry)//设置文档可见域
 
 function setServerPath(obj)//设置图层服务地址
 {
-    var newLayerURL = "http://"+ARCGISCONFIG.ARCSERVER + ARCGISCONFIG.ARCSERVERPORT+ obj.serverpath;//构建左侧图层
+    // var newLayerURL = "http://"+ARCGISCONFIG.ARCSERVER + ARCGISCONFIG.ARCSERVERPORT+ obj.serverpath;//构建左侧图层
+    var newLayerURL = obj.serverpath;//构建左侧图层
     this.serverPath = newLayerURL;
 }
 

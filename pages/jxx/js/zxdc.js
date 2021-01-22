@@ -8,6 +8,9 @@ var str;
 var legendData = new Array();
 var seriesData1 = [];
 var num;
+var PHYSICSTABLE_POJO={dyResult:null,fuResult:null};//从某个物理专项表取得的对象，在时间框选择版本时候也将选中的数据赋值给次全局变量
+var CURRENTSELECTMENUE = null;
+
 $(document).ready(function(){
     dengluLocation();
     huoquName();
@@ -41,13 +44,75 @@ $(document).ready(function(){
             $("#browserone").treeview();
         }
     });
+    
     //滑块移动事件
     huakuaiMove(".dcd1");
     //点击变色事件
     caidanChangeColor(".dcd");
-    //点击获取id
+    var clicktime_2 = (className,timeObj)=>{
+        $('.'+className).click(function(){
+            PHYSICSTABLE_POJO.fuResult = timeObj
+            console.log(PHYSICSTABLE_POJO.fuResult)
+            $('.'+className).css("color","blue");
+            var value1 = document.getElementsByClassName("time-text");//获取值
+            value1[0].innerHTML=className
+            $(".cc2").css("display","none");
+    
+            // new ChangeVersionClass().getCurrentDynamycLayerByFutureLayer();
+    
+        });
+    };
+   //时间版本选择
+    var tablephysicsdata = []
+    
+    $(".time-text").click(function(){
+        // console.log(tablephysicsdata)
+      var display = $(".cc2").css("display");
+      if(display == "none"){
+        $(".cc2").children().remove();
+        tablephysicsdata.forEach(e => {
+          a = e.updatetime.slice(0,11)
+          $(".cc2").append(`<ul><li class="${a}" type="${a}" style="padding:10px" id="sendtimeid"><img src="./img/timeicon.png"/>&nbsp;${a}</li></ul>`);
+          var timeObj = e
+          clicktime_2(a,timeObj)
+        })
+   
+        $(".cc2").css("display","inline-block");
+        }else{
+        $(".cc2").css("display","none");
+       };
+     });
+      //点击获取id
     $('.dcd,.dcd1').bind('click',function(){
+        $(".cc2").css("display","none");
         var data = JSON.parse($(this).attr('cd'));
+
+        if(data.physicstable != null && data.physicstable!=""){//从某个物理表中选择最后一次的版本
+
+            if(null==CURRENTSELECTMENUE || CURRENTSELECTMENUE != data.menuename){//判断是否每次点击的是同一个菜单（只有不同菜单才会去读取所有版本）
+                var tablephysicstable = new QueryClass().getAllPhysicsServiceVersion(1,data.physicstable)
+                PHYSICSTABLE_POJO.fuResult = tablephysicstable[tablephysicstable.length-1]
+                tablephysicsdata = tablephysicstable
+                var lastValue = PHYSICSTABLE_POJO.fuResult.updatetime.slice(0,11)
+                $(".time-text").html(lastValue);
+
+                CURRENTSELECTMENUE = data.menuename;
+            }
+
+
+
+            var aResult = new QueryClass().getPhysicsServiceByUpdatetime(0, data.physicstable,PHYSICSTABLE_POJO.fuResult.updatetime.slice(0,10));//根据选中的版本时间取得对应的动态地图服务
+
+            PHYSICSTABLE_POJO.dyResult = aResult;
+
+            data.serverpath = PHYSICSTABLE_POJO.dyResult.serviceaddr;
+            data.tablename = PHYSICSTABLE_POJO.fuResult.tablename;
+
+        }
+
+
+
+
         ESRIPOJO.addDynamicLayer(data);//添加图层
         GEOQUERYCLASS.setServerPath(data);//设置地理查询类
         GEOQUERYCLASS.clearGraphics(MAP);

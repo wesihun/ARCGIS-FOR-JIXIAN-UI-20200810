@@ -74,7 +74,8 @@ function addDynamicLayer(obj)//添加动态图层
     {
         this.removeLayer("newLayer");//移除
 
-        var newLayerURL = "http://"+ARCGISCONFIG.ARCSERVER + ARCGISCONFIG.ARCSERVERPORT+ obj.serverpath;//构建左侧图层
+        // var newLayerURL = "http://"+ARCGISCONFIG.ARCSERVER + ARCGISCONFIG.ARCSERVERPORT+ obj.serverpath;//构建左侧图层
+        var newLayerURL = obj.serverpath;//构建左侧图层
         var newLayer = new this.ArcGISDynamicMapServiceLayer(newLayerURL, {id:'newLayer'});
         MAP.addLayer(newLayer);
 

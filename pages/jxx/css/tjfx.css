@@ -170,3 +170,39 @@ table{
     border: 1px #B9D9F4 solid;
     background-color: white;
 }
+.select-time{
+    display: inline-block;
+    z-index:10000;
+    background-color: white;
+    position: absolute;
+    width: 200px;
+    height: 37px;
+    right:2.5%;
+    top:1.5%;
+}
+.time-text1{
+    display: inline-block;
+    width: 198px;
+    height: 35px;
+    font-size:larger;
+    color: #9d9d9d;
+    border: 2px #9fdfed solid;
+    background: transparent;
+    position: absolute;
+    z-index: 10001;
+    outline: none;
+    line-height: 35px;
+    text-align: left; 
+}
+.fg11{
+    display: inline-block;
+    width: 30px;
+    height: 37px;
+    background: #06c0e9;
+    position: absolute;
+    right: 0px;
+    z-index: 10000;
+    line-height: 37px;
+    text-align: center;
+    color: #9d9d9d;
+}

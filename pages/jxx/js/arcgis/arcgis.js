@@ -3,11 +3,9 @@ var handdle=null;
 var totalPages;
 var global_data=null, global_menue=null, global_rightMenue=null;//记录左侧菜单和右侧菜单
 
-
 require(["esri/map","esri/layers/GraphicsLayer", "dojo/dom", "dojo/on","esri/layers/ArcGISDynamicMapServiceLayer", "dojo/query", "esri/tasks/FindTask", "esri/tasks/FindParameters", "esri/symbols/SimpleLineSymbol", "esri/symbols/SimpleFillSymbol", "esri/Color", "esri/graphic", "esri/tasks/QueryTask", "esri/tasks/query","esri/geometry/Point","esri/graphicsUtils","esri/layers/FeatureLayer","esri/renderers/UniqueValueRenderer","esri/dijit/OverviewMap","esri/dijit/Scalebar","esri/layers/ArcGISImageServiceLayer","esri/tasks/PrintTask", "esri/tasks/PrintTemplate", "esri/tasks/PrintParameters","esri/toolbars/draw","esri/symbols/TextSymbol","esri/symbols/Font","esri/toolbars/edit","dojo/domReady!"], init);
 
 function init(Map, GraphicsLayer,dom, on, ArcGISDynamicMapServiceLayer, query, FindTask, FindParameters,SimpleLineSymbol, SimpleFillSymbol, Color, Graphic, QueryTask, Query, Point,graphicsUtils,FeatureLayer,UniqueValueRenderer,OverviewMap,Scalebar,ArcGISImageServiceLayer,PrintTask,PrintTemplate,PrintParameters,Draw,TextSymbol,Font,Edit){
-
     var map = new Map("map_div", {logo: false });
     var layer = new ArcGISDynamicMapServiceLayer(ARCGISCONFIG.DLTB_Dinamic,{id:'dltb'});
     var layer_XZQ = new ArcGISDynamicMapServiceLayer(ARCGISCONFIG.XZQ_TAG_WITH_MAXSCALE_1_50000,{id:'xzq'});
@@ -187,27 +185,57 @@ function messageBox(feature) {//信息框
     $(".lone").children().remove();
 
     var divElement = "";
-    divElement += "<div>" + "要素代码：" + feature.attributes.YSDM +"</div>"
-    divElement += "<div>" + "图斑编号：" + feature.attributes.TBBH +"</div>"
-    divElement += "<div>" + "地类编码：" + feature.attributes.DLBM +"</div>"
-    divElement += "<div>" + "地类名称：" + feature.attributes.DLMC +"</div>"
-    divElement += "<div>" + "权属性质：" + feature.attributes.QSXZ +"</div>"
-    divElement += "<div>" + "权属单位代码：" + feature.attributes.QSDWDM +"</div>"
-    divElement += "<div>" + "权属单位名称：" + feature.attributes.QSDWMC +"</div>"
-    divElement += "<div>" + "图斑面积：" + feature.attributes.TBMJ +"</div>"
-    divElement += "<div>" + "扣除地类编码：" + feature.attributes.KCDLBM  +"</div>"
-    divElement += "<div>" + "扣除地类系数：" + feature.attributes.KCXS   +"</div>"
-    divElement += "<div>" + "扣除地类面积：" + feature.attributes.KCMJ    +"</div>"
-    divElement += "<div>" + " 图斑地类面积：" + feature.attributes.TBDLMJ    +"</div>"
-    divElement += "<div>" + "耕地坡度级别：" + feature.attributes.GDPDJB    +"</div>"
-    //divElement += "<div>" + "耕地类型：" + feature.attributes.GDLX    +"</div>"
-    //divElement += "<div>" + "线状地物宽度：" + feature.attributes.XZDWKD     +"</div>"
-    divElement += "<div>" + "图斑细化代码：" + feature.attributes.TBXHDM     +"</div>"
-    divElement += "<div>" + "图斑细化名称：" + feature.attributes.TBXHMC     +"</div>"
-    divElement += "<div>" + "种植属性代码：" + feature.attributes.ZZSXDM     +"</div>"
-    divElement += "<div>" + "种植属性名称：" + feature.attributes.ZZSXMC     +"</div>"
-    divElement += "<div>" + "耕地等别：" + feature.attributes.GDDB     +"</div>"
-    divElement += "<div>" + "数据年份：" + feature.attributes.SJNF    +"</div>"
+
+    // if(/^[A-Z]+$/.test( feature.attributes.DLMC )){//大写
+    if(feature.attributes.DLMC != null && feature.attributes.DLMC != 'undefined'){//大写
+        divElement += "<div>" + "要素代码：" + feature.attributes.YSDM +"</div>"
+        divElement += "<div>" + "图斑编号：" + feature.attributes.TBBH +"</div>"
+        divElement += "<div>" + "地类编码：" + feature.attributes.DLBM +"</div>"
+        divElement += "<div>" + "地类名称：" + feature.attributes.DLMC +"</div>"
+        divElement += "<div>" + "权属性质：" + feature.attributes.QSXZ +"</div>"
+        divElement += "<div>" + "权属单位代码：" + feature.attributes.QSDWDM +"</div>"
+        divElement += "<div>" + "权属单位名称：" + feature.attributes.QSDWMC +"</div>"
+        divElement += "<div>" + "图斑面积：" + feature.attributes.TBMJ +"</div>"
+        divElement += "<div>" + "扣除地类编码：" + feature.attributes.KCDLBM  +"</div>"
+        divElement += "<div>" + "扣除地类系数：" + feature.attributes.KCXS   +"</div>"
+        divElement += "<div>" + "扣除地类面积：" + feature.attributes.KCMJ    +"</div>"
+        divElement += "<div>" + " 图斑地类面积：" + feature.attributes.TBDLMJ    +"</div>"
+        divElement += "<div>" + "耕地坡度级别：" + feature.attributes.GDPDJB    +"</div>"
+        //divElement += "<div>" + "耕地类型：" + feature.attributes.GDLX    +"</div>"
+        //divElement += "<div>" + "线状地物宽度：" + feature.attributes.XZDWKD     +"</div>"
+        divElement += "<div>" + "图斑细化代码：" + feature.attributes.TBXHDM     +"</div>"
+        divElement += "<div>" + "图斑细化名称：" + feature.attributes.TBXHMC     +"</div>"
+        divElement += "<div>" + "种植属性代码：" + feature.attributes.ZZSXDM     +"</div>"
+        divElement += "<div>" + "种植属性名称：" + feature.attributes.ZZSXMC     +"</div>"
+        divElement += "<div>" + "耕地等别：" + feature.attributes.GDDB     +"</div>"
+        divElement += "<div>" + "数据年份：" + feature.attributes.SJNF    +"</div>"
+    }
+    else {
+        divElement += "<div>" + "要素代码：" + feature.attributes.ysdm +"</div>"
+        divElement += "<div>" + "图斑编号：" + feature.attributes.tbbh +"</div>"
+        divElement += "<div>" + "地类编码：" + feature.attributes.dlbm +"</div>"
+        divElement += "<div>" + "地类名称：" + feature.attributes.dlmc +"</div>"
+        divElement += "<div>" + "权属性质：" + feature.attributes.qsxz +"</div>"
+        divElement += "<div>" + "权属单位代码：" + feature.attributes.qsdwdm +"</div>"
+        divElement += "<div>" + "权属单位名称：" + feature.attributes.qsdwmc +"</div>"
+        divElement += "<div>" + "图斑面积：" + feature.attributes.tbmj +"</div>"
+        divElement += "<div>" + "扣除地类编码：" + feature.attributes.kcdlbm  +"</div>"
+        divElement += "<div>" + "扣除地类系数：" + feature.attributes.ecxs   +"</div>"
+        divElement += "<div>" + "扣除地类面积：" + feature.attributes.ecmj    +"</div>"
+        divElement += "<div>" + " 图斑地类面积：" + feature.attributes.tbdlmj    +"</div>"
+        divElement += "<div>" + "耕地坡度级别：" + feature.attributes.gdpdjb    +"</div>"
+        //divElement += "<div>" + "耕地类型：" + feature.attributes.GDLX    +"</div>"
+        //divElement += "<div>" + "线状地物宽度：" + feature.attributes.XZDWKD     +"</div>"
+        divElement += "<div>" + "图斑细化代码：" + feature.attributes.tbxhdm     +"</div>"
+        divElement += "<div>" + "图斑细化名称：" + feature.attributes.tbxhmc     +"</div>"
+        divElement += "<div>" + "种植属性代码：" + feature.attributes.zzsxdm     +"</div>"
+        divElement += "<div>" + "种植属性名称：" + feature.attributes.zzsxmc     +"</div>"
+        divElement += "<div>" + "耕地等别：" + feature.attributes.gddb     +"</div>"
+        divElement += "<div>" + "数据年份：" + feature.attributes.sjnf    +"</div>"
+    }
+
+
+
 
     $(".lone").append(divElement);
     $(".mone").html(feature.attributes.DLMC);
@@ -222,7 +250,7 @@ function queryDLTB(data, menue, rightMenue){//点击左侧树
             
             global_data=newMenue;//全局二级分类数据
 
-            $.ajax({url:GEOSERVER.IP + GEOSERVER.PORT + '/getDLTB', type: 'POST', data:{"jsonMenue":JSON.stringify(newMenue), "proviceCode":getCountryCode(rightMenue)}, xhrFields:{withCredentials:true}, success:function(resultData){
+            $.ajax({url:GEOSERVER.IP + GEOSERVER.PORT + '/getDLTB', type: 'POST', data:{"jsonMenue":JSON.stringify(newMenue), "proviceCode":getCountryCode(rightMenue),'tablename':TB_DLTBPHYSICS.fuPojo.tablename}, xhrFields:{withCredentials:true}, success:function(resultData){
                 queryDltbByObjectID(resultData);//根据OBJECTID查询图斑并高亮
             }});
 
@@ -233,12 +261,12 @@ function queryDLTB(data, menue, rightMenue){//点击左侧树
         $(".bing").css("display","none");
 
     }else {
-        $.ajax({url:GEOSERVER.IP + GEOSERVER.PORT + '/getDLTB', type: 'POST', data:{"jsonMenue":JSON.stringify(data), "proviceCode":getCountryCode(rightMenue)}, xhrFields:{withCredentials:true}, success:function(resultData){
+        $.ajax({url:GEOSERVER.IP + GEOSERVER.PORT + '/getDLTB', type: 'POST', data:{"jsonMenue":JSON.stringify(data), "proviceCode":getCountryCode(rightMenue),'tablename':TB_DLTBPHYSICS.fuPojo.tablename}, xhrFields:{withCredentials:true}, success:function(resultData){
             queryDltbByObjectID(resultData);//根据OBJECTID查询图斑并高亮
         }});
          
         createBingReport(data, menue.menuename,rightMenue);
-        creatZhuReport(data, menue.menuename, rightMenue)
+        creatZhuReport(data, menue.menuename, rightMenue);
 
         global_data=data;//全局二级分类数据
 
@@ -287,8 +315,8 @@ function queryDltbByObjectID(result){//根据OBJECTID查询图斑并高亮
 
 
 function createBingReport(data, menuename, rightMenue){
-    $.ajax({url:GEOSERVER.IP + GEOSERVER.PORT + '/getSecondCategoryCode', type: 'POST', data:{"jsonMenue":JSON.stringify(data), "proviceCode":getCountryCode(rightMenue)}, xhrFields:{withCredentials:true}, success:function(result) {
-        console.log({url:GEOSERVER.IP + GEOSERVER.PORT + '/getSecondCategoryCode', type: 'POST', data:{"jsonMenue":JSON.stringify(data), "proviceCode":getCountryCode(rightMenue)}})
+    $.ajax({url:GEOSERVER.IP + GEOSERVER.PORT + '/getSecondCategoryCode', type: 'POST', data:{"jsonMenue":JSON.stringify(data), "proviceCode":getCountryCode(rightMenue),'tablename':TB_DLTBPHYSICS.fuPojo.tablename}, xhrFields:{withCredentials:true}, success:function(result) {
+        console.log({url:GEOSERVER.IP + GEOSERVER.PORT + '/getSecondCategoryCode', type: 'POST', data:{"jsonMenue":JSON.stringify(data), "proviceCode":getCountryCode(rightMenue),'tablename':TB_DLTBPHYSICS.fuPojo.tablename}})
         var legendData = "[";
         var seriesData = "["
 
@@ -329,7 +357,7 @@ function createBingReport(data, menuename, rightMenue){
 }
 
 function creatZhuReport(data, menuename, rightMenue){
-    $.ajax({url:GEOSERVER.IP + GEOSERVER.PORT + '/getSecondCategoryCode', type: 'POST', data:{"jsonMenue":JSON.stringify(data), "proviceCode":getCountryCode(rightMenue)}, xhrFields:{withCredentials:true}, success:function(result) {
+    $.ajax({url:GEOSERVER.IP + GEOSERVER.PORT + '/getSecondCategoryCode', type: 'POST', data:{"jsonMenue":JSON.stringify(data), "proviceCode":getCountryCode(rightMenue),'tablename':TB_DLTBPHYSICS.fuPojo.tablename}, xhrFields:{withCredentials:true}, success:function(result) {
         var xAxisData = "[";
         var seriesData = "[";
         if(result.length <=0) {return;}
@@ -418,7 +446,7 @@ function exportReportPDF(map, event){//导出报表按钮，根据行政区和�
         return;
     }
 
-    $.ajax({url:GEOSERVER.IP + GEOSERVER.PORT + '/exportReportPDF', type: 'POST', data:{"jsonMenue":JSON.stringify(global_data), "proviceCode":getCountryCode(global_rightMenue), "rightMenueName":global_rightMenue.name, "menuename":global_menue.menuename}, xhrFields:{withCredentials:true}, success:function(result) {
+    $.ajax({url:GEOSERVER.IP + GEOSERVER.PORT + '/exportReportPDF', type: 'POST', data:{"jsonMenue":JSON.stringify(global_data), "proviceCode":getCountryCode(global_rightMenue), "rightMenueName":global_rightMenue.name, "menuename":global_menue.menuename,'tablename':TB_DLTBPHYSICS.fuPojo.tablename}, xhrFields:{withCredentials:true}, success:function(result) {
 
         var link = document.createElement('a');//下载报表文件
         link.setAttribute("download", "");

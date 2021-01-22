@@ -1,3 +1,6 @@
+var PHYSICSTABLE_POJO={dyResult:null,fuResult:null};//从某个物理专项表取得的对象，在时间框选择版本时候也将选中的数据赋值给次全局变量
+var CURRENTSELECTMENUE = null;
+
 // 是否登录检测
 function jiancelogin(){
     var call;
@@ -123,6 +126,25 @@ function caidanChangeColor(className){
         $(`${className},.folder`).css("color","black");
     });
 };
+//
+//时间版本框
+var clicktime = (className,timeObj)=>{
+    $('.'+className).click(function(){
+        TB_DLTBPHYSICS.fuPojo = timeObj
+        // console.log(TB_DLTBPHYSICS.fuPojo)
+        $('.'+className).css("color","blue");
+        var value1 = document.getElementsByClassName("time-text");//获取值
+        value1[0].innerHTML=className
+        $(".cc2").css("display","none");
+
+        new ChangeVersionClass().getCurrentDynamycLayerByFutureLayer();//改变版本逻辑类
+        new ChangeVersionClass().changeLayer();//动态添加移除图层
+
+    });
+};
+
+
+
 //形成树菜单 无限层级
    function tree(data,className){
        for(var i=0;i<data.length;i++){
@@ -197,26 +219,26 @@ function treetjfx(data,className){
 };
    //审核员页面检测
    function shy(){
-    $.ajax({
-        url:config.ip + config.port + '/getUserInfo',
-        type: 'POST',
-        async: false,
-        xhrFields:{withCredentials:true},
-        success:function(data){
-            var glorolename = [];
-            for(var i=0;i<data.length;i++){
-                glorolename.push(data[i].role.rolename);
-            };
-            if(glorolename.indexOf("管理员") >= 0){
-                
-            }else{
-                location.href = "./welcome.html"
-            };
-        },
-        error:function(){
-            location.href = "./login.html"
-        }
-    });
+        $.ajax({
+            url:config.ip + config.port + '/getUserInfo',
+            type: 'POST',
+            async: false,
+            xhrFields:{withCredentials:true},
+            success:function(data){
+                var glorolename = [];
+                for(var i=0;i<data.length;i++){
+                    glorolename.push(data[i].role.rolename);
+                };
+                if(glorolename.indexOf("管理员") >= 0){
+                    
+                }else{
+                    location.href = "./welcome.html"
+                };
+            },
+            error:function(){
+                location.href = "./login.html"
+            }
+        });
    };
    //判断点击事件
    function PDclick(){
@@ -229,6 +251,7 @@ function treetjfx(data,className){
             var glorolename = [];
             for(var i=0;i<data.length;i++){
                 glorolename.push(data[i].role.rolename);
+
             };
             if(glorolename.indexOf("管理员") >= 0){
                 $.ajax({
@@ -309,14 +332,16 @@ function treetjfx(data,className){
                };
                var a = glo.toString().replace(/\,/g,"");
                if(a.indexOf(fone) < 0){
-                   confirm("搜索字符不存在");    
+                   confirm("搜索字符不存在");
                };
         };
      });
  };
  //点击查询拼接的树型菜单(统计分析)
  function queryCdtj(queryInput,queryButton,treeId,data){
+
     $(`${queryButton}`).click(function(){
+
         $(`${treeId}`).children().remove();
         treetjfx(data,`${treeId}`);
         $(`${treeId}`).treeview();
@@ -345,23 +370,112 @@ function treetjfx(data,className){
         };
      });
  };
+ var clicktime_2 = (className,timeObj)=>{
+    $('.'+className).click(function(){
+        PHYSICSTABLE_POJO.fuResult = timeObj
+        // console.log(timeObj)
+        $('.'+className).css("color","blue");
+        var value1 = document.getElementsByClassName("time-text1");//获取值
+        value1[0].innerHTML=className
+        $(".cc2").css("display","none");
+        // new ChangeVersionClass().getCurrentDynamycLayerByFutureLayer();
+
+    });
+};
  //click tree 创建table
+ var aResult;
+ $(".time-text1").click(function(){
+
+    // var arr = aResult
+    var display = $(".cc2").css("display");
+    if(display == "none"){
+      $(".cc2").children().remove();
+    if(aResult){
+      aResult.forEach(e => {
+        a = e.updatetime.slice(0,11)
+        $(".cc2").append(`<ul><li class="${a}" type="${a}" style="padding:10px" id="sendtimeid"><img src="./img/timeicon.png"/>&nbsp;${a}</li></ul>`);
+        var timeObj = e
+        clicktime_2(a,timeObj)
+      })
+    }else{
+        // console.log('text')
+    }
+      $(".cc2").css("display","inline-block");
+      }else{
+        
+        $(".cc2").css("display","none");
+     };
+    //  aResult = []
+   });
  function clitree(){
+
     //生成折线图
     zhexian("",[0,0,0,0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0,0,0,0]);
     //生成饼形图
     bing("#bing1",bing1,'数量','数量',['总数'],[{value:0,name:'总数',itemStyle:{color:'#FAD03E'}}]);
     bing("#bing2",bing2,'面积','面积',['总面积'],[{value:0,name:'总面积',itemStyle:{color:'#5cd1fa'}}]);
 $('.dcd1,.dcd').on('click',function(){
+    $(".cc2").css("display","none");
     if($(this).attr('typeid') =='polyline'){
       $('#bing2').css('display','none');
     }else{
       $('#bing2').css('display','inline-block');
     };
     //点击非根节点
-    if($(this).attr('class') == 'file dcd'){
+    if($(this).attr('class') == 'file dcd'){//--------------------点击左侧菜单------------------------
        json = $(this).attr('cd');
-       nameche = $(this).html(); 
+        var newjson = JSON.parse(json);
+       
+        if(null==CURRENTSELECTMENUE || CURRENTSELECTMENUE != newjson.menuename) {//判断是否每次点击的是同一个菜单（只有不同菜单才会去读取所有版本）
+            
+            getAllPhysicsServiceVersion(1,JSON.parse(json).physicstable)
+            function getAllPhysicsServiceVersion(type, physicstable) {//获取所有更新版本的服务版本（根据类型和物理表名）(0动态地图，1要素，2影像)
+                $.ajax({url:config.ip + config.port + '/getAllPhysicsServiceVersion', type: 'POST', data:{type:type,physicstable:physicstable }, xhrFields:{withCredentials:true},async: false, success:function(result) {//最后一次更新的地类图斑动态地图服务type（0动态地图，1要素，2影像）
+                    aResult =  result;
+                }, error:function() {}});
+                PHYSICSTABLE_POJO.fuResult = aResult[aResult.length-1]
+                var lastValue = aResult[aResult.length-1].updatetime.slice(0,11)
+                $(".time-text1").html(lastValue);
+                // return aResult;
+            }
+
+            CURRENTSELECTMENUE = newjson.menuename;
+        }
+
+
+
+
+
+
+        // var aResult = getPhysicsServiceByUpdatetime(0,newjson.physicstable,PHYSICSTABLE_POJO.fuResult.updatetime);
+        // function getPhysicsServiceByUpdatetime(type, physicstable,updatetime){//根据更新时间取得某服务（根据类型和物理表名）(0动态地图，1要素，2影像)
+        //     var aResult;
+        //     $.ajax({url:config.ip + config.port + '/getPhysicsServiceByUpdatetime', type: 'POST', data:{type:type,physicstable:physicstable,updatetime:updatetime }, xhrFields:{withCredentials:true},async: false, success:function(result) {//最后一次更新的地类图斑动态地图服务type（0动态地图，1要素，2影像）
+        //         aResult =  result;
+        //     }, error:function() {}});
+        //     return aResult;
+        // }
+        // PHYSICSTABLE_POJO.dyResult = aResult;
+
+
+        newjson.tablename = PHYSICSTABLE_POJO.fuResult.tablename;
+        json = JSON.stringify(newjson);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+       nameche = $(this).html();
       //clear
       $('#tj thead tr').children().remove();
       str = '';
@@ -373,7 +487,7 @@ $('.dcd1,.dcd').on('click',function(){
       $.ajax({
         url:GEOSERVER.IP + GEOSERVER.PORT + '/getAnalysisTotalRecord',
         type: 'POST',
-        data:{jsonTree:$(this).attr('cd')},
+        data:{jsonTree:json},
         xhrFields:{withCredentials:true},
         success:function(data){
             bing("#bing1",bing1,title+'数量','数量',['总数'],[{value:data.result,name:'总数',itemStyle:{color:'#FAD03E'}}]);
@@ -383,7 +497,7 @@ $('.dcd1,.dcd').on('click',function(){
       $.ajax({
           url:GEOSERVER.IP + GEOSERVER.PORT + '/getAnalysisTotalArea',
           type: 'POST',
-          data:{jsonTree:$(this).attr('cd')},
+          data:{jsonTree:json},
           xhrFields:{withCredentials:true},
           success:function(data){
               bing("#bing2",bing2,title+'面积','面积',['总面积'],[{value:data.result,name:'总面积',itemStyle:{color:'#5cd1fa'}}]);
@@ -393,7 +507,7 @@ $('.dcd1,.dcd').on('click',function(){
       $.ajax({
         url:GEOSERVER.IP + GEOSERVER.PORT + '/getAnalysisTotalRecord',
         type: 'POST',
-        data:{jsonTree:$(this).attr('cd')},
+        data:{jsonTree:json},
         xhrFields:{withCredentials:true},
         success:function(data){
             //获取折线图数据,生成折线图
@@ -895,6 +1009,24 @@ $('.dcd1,.dcd').on('click',function(){
             };
         }else{
            $(`${className}`).append(`<ul><li><span class="file cd" menueid='${JSON.stringify(data[i])}'>${data[i].name}</span></li></ul>`);
+        };
+      };
+};
+ //遍历时间
+ function bianlitime(data,className){
+    for(var i=0;i<data.length;i++){
+        if(data[i].length != 0){
+           $(`${className}`).append(`<ul><li class="closed d${data[i].id}"><span class="folder cd1" menueid='${JSON.stringify(data[i])}'>${data[i].updatetime}</span></li></ul>`);
+        //    for(var j=0;j<data[i].subAdministrations.length;j++){
+        //         if(data[i].subAdministrations[j].subAdministrations != 0){
+        //            $(`.d${data[i].id}`).append(`<ul><li class="closed d${data[i].subAdministrations[j].id}"><span class="folder cd1" menueid='${JSON.stringify(data[i].subAdministrations[j])}'>${data[i].subAdministrations[j].name}</span></li></ul>`);
+        //            bianliDF(data[i].subAdministrations[j].subAdministrations,`.d${data[i].subAdministrations[j].id}`);
+        //         }else{
+        //            $(`.d${data[i].id}`).append(`<ul><li><span class="file cd" menueid='${JSON.stringify(data[i].subAdministrations[j])}'>${data[i].subAdministrations[j].name}</span></li></ul>`);
+        //         };
+        //     };
+        }else{
+           $(`${className}`).append(`<ul><li><span class="file cd" menueid='${JSON.stringify(data[i])}'>${data[i].updatetime}</span></li></ul>`);
         };
       };
 };
