@@ -134,7 +134,14 @@ var clicktime = (className,timeObj)=>{
         // console.log(TB_DLTBPHYSICS.fuPojo)
         $('.'+className).css("color","blue");
         var value1 = document.getElementsByClassName("time-text");//获取值
-        value1[0].innerHTML=className
+        var a = '<span style="background:#2ed9fe;color:#fff;letter-spacing:3px;border-radius:2px;">'+timeObj.version+'</span>'
+        var b ='<span style="background:#08e6ce;color:#fff;letter-spacing:3px;border-radius:2px;">'+timeObj.version+'</span>'
+        if(timeObj.version=='三调'){
+            value1[0].innerHTML=className + b
+        } else {
+            value1[0].innerHTML=className + a
+        }
+        
         $(".cc2").css("display","none");
 
         new ChangeVersionClass().getCurrentDynamycLayerByFutureLayer();//改变版本逻辑类

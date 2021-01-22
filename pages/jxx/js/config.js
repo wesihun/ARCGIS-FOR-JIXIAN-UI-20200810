@@ -1,9 +1,10 @@
+
 //业务服务
 var config;
 config={
-    ip: 'http://localhost',
+    ip: 'http://192.168.11.235',
     port: ':8081',
-    newip: 'http://192.168.11.220',
+    newip: 'http://192.168.11.235',
     newport:':5050',
 };
 

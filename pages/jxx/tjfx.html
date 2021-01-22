@@ -10,7 +10,13 @@
     <link rel="stylesheet" href="./css/tjfx.css">
     <script src="./js/echarts.min.js"></script>
 </head>
+<style>
+    .class_name{
+		color: #5695F4;
+	}
+</style>
 <body>  
+    <div id="box" style="background: #eee;position: absolute;left: 0px;top: 0px;z-index: 100;width: 1920px;height: 1080px;opacity: 0.5;display: none;"></div>
     <div id="top">
         <div class="logo"></div>
         <div class="text"></div>
@@ -59,9 +65,188 @@
                 </div>
             </div>
             <!-- table -->
-            <div style='position: absolute;width: 1395px;height: 546px;background-color: white;top:77px;left:61.5px;box-shadow:0px 0px 7px 0px rgba(0, 0, 0, 0.09);border-radius:10px;'>
+            <div style='position: absolute;width: 1395px;height: 560px;background-color: white;top:77px;left:61.5px;box-shadow:0px 0px 7px 0px rgba(0, 0, 0, 0.09);border-radius:10px;'>
             <div style='font-size:18px;font-family:Source Han Sans CN;font-weight:400;color:rgba(51,51,51,1);position: absolute;left: 617px;top:25px;'><span id='area'>数据统计</span></div>
             <div id='dcsj'>导出数据</div>
+            <div id='hzbg'>三调汇总表格</div>
+            <div class="zhezhao"></div>
+            <div id="showtable" style="width: 1040px;height: 640px;background: #fff; border-radius: 5px;position: absolute;top: 7%;left: 10%;z-index: 200;box-shadow: 0 0 5px 10px  rgb(187, 187, 187);display: none;">
+                <div style="display:flex;justify-content: space-between;align-items: center;margin: 10px;padding-left: 40px;padding-right: 40px;">
+                    <div class="class_name" id="show1" style="font-size: 18px;font-family: Source Han Sans CN;font-weight: 400;line-height: 44px;">土地类</div>
+                    <div id="show2" style="font-size: 18px;font-family: Source Han Sans CN;font-weight: 400;line-height: 44px;">海岛类</div>
+                    <div id="show3" style="font-size: 18px;font-family: Source Han Sans CN;font-weight: 400;line-height: 44px;">草地类</div>
+                    <div id="show4" style="font-size: 18px;font-family: Source Han Sans CN;font-weight: 400;line-height: 44px;">耕地类</div>
+                    <div id="show5" style="font-size: 18px;font-family: Source Han Sans CN;font-weight: 400;line-height: 44px;">其他类</div>
+                    <div id="show6" style="font-size: 18px;font-family: Source Han Sans CN;font-weight: 400;line-height: 44px;">飞入地类</div>
+                    <div id="show7" style="font-size: 18px;font-family: Source Han Sans CN;font-weight: 400;line-height: 44px;">工业及工矿类</div>
+                </div>
+                <div style="width: 930px;height:2px;background:  #ABD2F2;margin: 0 auto"></div>
+                <div id="show1_">
+                    <div style="display: flex;align-items: center;justify-content: flex-start;padding: 30px 50px;">
+                        <div onclick=down1(text) style="display: flex;align-items: center;justify-content: center;">
+                            <img src="./img/exlce.png" alt="">
+                            <div id="text" style="font-size: 18px;font-family: Source Han Sans CN;font-weight: 400;color: #333333;">(230521)永久基本农田现状情况统计表.xls</div>
+                        </div>
+                        <div onclick=down1(text1) style="display: flex;align-items: center;justify-content: center;margin-left: 140px;">
+                            <img src="./img/exlce.png" alt="">
+                            <div id="text1" style="font-size: 18px;font-family: Source Han Sans CN;font-weight: 400;color: #333333;">(230521)土地利用现状一级分类面积汇总表.xls</div>
+                        </div>
+                        
+                    </div>
+                    <div style="width: 919px;height: 1px;background: #E8E8E8;margin: 0 auto;"></div>
+                    <div style="display: flex;align-items: center;justify-content: flex-start;padding: 30px 50px;">
+                        <div onclick=down1(text2) style="display: flex;align-items: center;justify-content: center;">
+                            <img src="./img/exlce.png" alt="">
+                            <div id="text2" style="font-size: 18px;font-family: Source Han Sans CN;font-weight: 400;color: #333333;">(230521)土地利用现状一级分类面积按权属性质汇总表.xls</div>
+                        </div>
+                        <div onclick=down1(text3) style="display: flex;align-items: center;justify-content: center;margin-left: 14px;">
+                            <img src="./img/exlce.png" alt="">
+                            <div id="text3" style="font-size: 18px;font-family: Source Han Sans CN;font-weight: 400;color: #333333;">(230521)土地利用现状分类面积汇总表.xls</div>
+                        </div>
+                        
+                    </div>
+                    <div style="width: 919px;height: 1px;background: #E8E8E8;margin: 0 auto;"></div>
+                    <div style="display: flex;align-items: center;justify-content: space-between;padding: 30px 50px;">
+                        <div onclick=down1(text4) style="display: flex;align-items: center;justify-content: center;">
+                            <img src="./img/exlce.png" alt="">
+                            <div id="text4" style="font-size: 18px;font-family: Source Han Sans CN;font-weight: 400;color: #333333;">(230521)批准未建设的建设用地用途情况统计表.xls</div>
+                        </div>
+                        <div onclick=down1(text5) style="display: flex;align-items: center;justify-content: center;margin-left: 80px;">
+                            <img src="./img/exlce.png" alt="">
+                            <div id="text5" style="font-size: 18px;font-family: Source Han Sans CN;font-weight: 400;color: #333333;">(230521)批准未建设的建设用地现状情况统计表.xls</div>
+                        </div>
+                        
+                    </div>
+                    <div style="width: 919px;height: 1px;background: #E8E8E8;margin: 0 auto;"></div>
+                    <div style="display: flex;align-items: center;justify-content: flex-start;padding: 30px 50px;">
+                        <div onclick=down1(text6) style="display: flex;align-items: center;justify-content: center;">
+                            <img src="./img/exlce.png" alt="">
+                            <div id="text6" style="font-size: 18px;font-family: Source Han Sans CN;font-weight: 400;color: #333333;">(230521)林区范围内种植园用地汇总统计表.xls</div>
+                        </div>
+                        <div onclick=down1(text7) style="display: flex;align-items: center;justify-content: center;margin-left: 106px;">
+                            <img src="./img/exlce.png" alt="">
+                            <div id="text7" style="font-size: 18px;font-family: Source Han Sans CN;font-weight: 400;color: #333333;">(230521)可调整地类面积汇总表.xls</div>
+                        </div>
+                        
+                    </div>
+                    <div style="width: 919px;height: 1px;background: #E8E8E8;margin: 0 auto;"></div>
+                    <div style="display: flex;align-items: center;justify-content: space-between;padding: 30px 50px;">
+                        <div onclick=down1(text8) style="display: flex;align-items: center;justify-content: center;">
+                            <img src="./img/exlce.png" alt="">
+                            <div id="text8" style="font-size: 18px;font-family: Source Han Sans CN;font-weight: 400;color: #333333;">(230521)即可恢复与工程恢复种植属性汇总统计表.xls</div>
+                        </div>
+                        <div onclick=down1(text9) style="display: flex;align-items: center;justify-content: center;margin-right: 5px;">
+                            <img src="./img/exlce.png" alt="">
+                            <div id="text9" style="font-size: 18px;font-family: Source Han Sans CN;font-weight: 400;color: #333333;">(230521)第三次全国国土调查有关情况统计表.xls</div>
+                        </div>
+                        
+                    </div>
+                    <div style="width: 919px;height: 1px;background: #E8E8E8;margin: 0 auto;"></div>
+                </div>
+                <div id="show2_" style="display: none;">
+                    <div style="display: flex;align-items: center;justify-content: flex-start;padding: 30px 50px;">
+                        <div onclick=down1(text10) style="display: flex;align-items: center;justify-content: center;">
+                            <img src="./img/exlce.png" alt="">
+                            <div id="text10" style="font-size: 18px;font-family: Source Han Sans CN;font-weight: 400;color: #333333;">(230521)海岛土地利用现状一级分类面积汇总表.xls</div>
+                        </div>
+                        <div onclick=down1(text11) style="display: flex;align-items: center;justify-content: center;margin-left: 140px;">
+                            <img src="./img/exlce.png" alt="">
+                            <div id="text11" style="font-size: 18px;font-family: Source Han Sans CN;font-weight: 400;color: #333333;">(230521)海岛土地利用现状分类面积汇总表.xls</div>
+                        </div>
+                        
+                    </div>
+                    <div style="width: 919px;height: 1px;background: #E8E8E8;margin: 0 auto;"></div>
+                </div>
+                <div id="show3_" style="display: none;">
+                    <div style="display: flex;align-items: center;justify-content: flex-start;padding: 30px 50px;">
+                        <div onclick=down1(text12) style="display: flex;align-items: center;justify-content: center;">
+                            <img src="./img/exlce.png" alt="">
+                            <div id="text12" style="font-size: 18px;font-family: Source Han Sans CN;font-weight: 400;color: #333333;">(230521)灌丛草地汇总情况统计表.xls</div>
+                        </div>
+                    </div>
+                    <div style="width: 919px;height: 1px;background: #E8E8E8;margin: 0 auto;"></div>
+                </div>
+                <div id="show4_" style="display: none;">
+                    <div style="display: flex;align-items: center;justify-content: flex-start;padding: 30px 50px;">
+                        <div onclick=down1(text13) style="display: flex;align-items: center;justify-content: center;">
+                            <img src="./img/exlce.png" alt="">
+                            <div id="text13" style="font-size: 18px;font-family: Source Han Sans CN;font-weight: 400;color: #333333;">(230521)耕地种植类型面积统计表.xls</div>
+                        </div>
+                        <div onclick=down1(text14) style="display: flex;align-items: center;justify-content: center;margin-left: 140px;">
+                            <img src="./img/exlce.png" alt="">
+                            <div id="text14" style="font-size: 18px;font-family: Source Han Sans CN;font-weight: 400;color: #333333;">(230521)耕地细化调查情况统计表.xls</div>
+                        </div>
+                    </div>
+                    <div style="width: 919px;height: 1px;background: #E8E8E8;margin: 0 auto;"></div>
+                    <div style="display: flex;align-items: center;justify-content: flex-start;padding: 30px 50px;">
+                        <div onclick=down1(text15) style="display: flex;align-items: center;justify-content: center;">
+                            <img src="./img/exlce.png" alt="">
+                            <div id="text15" style="font-size: 18px;font-family: Source Han Sans CN;font-weight: 400;color: #333333;">(230521)耕地坡度分级面积汇总表.xls</div>
+                        </div>
+         
+                    </div>
+                    <div style="width: 919px;height: 1px;background: #E8E8E8;margin: 0 auto;"></div>
+                </div>
+                <div id="show5_" style="display: none;">
+                    <div style="display: flex;align-items: center;justify-content: flex-start;padding: 30px 50px;">
+                        <div onclick=down1(text16) style="display: flex;align-items: center;justify-content: center;">
+                            <img src="./img/exlce.png" alt="">
+                            <div id="text16" style="font-size: 18px;font-family: Source Han Sans CN;font-weight: 400;color: #333333;">(230521)废弃与垃圾填埋细化标注汇总统计表.xls</div>
+                        </div>
+                
+                    </div>
+                    <div style="width: 919px;height: 1px;background: #E8E8E8;margin: 0 auto;"></div>
+                 
+                </div>
+                <div id="show6_" style="display: none;">
+                    <div style="display: flex;align-items: center;justify-content: flex-start;padding: 30px 50px;">
+                        <div onclick=down1(text17) style="display: flex;align-items: center;justify-content: center;">
+                            <img src="./img/exlce.png" alt="">
+                            <div id="text17" style="font-size: 18px;font-family: Source Han Sans CN;font-weight: 400;color: #333333;">(230521)飞入地土地利用现状一级分类面积汇总表.xls</div>
+                        </div>
+                        <div onclick=down1(text18) style="display: flex;align-items: center;justify-content: center;margin-left: 140px;">
+                            <img src="./img/exlce.png" alt="">
+                            <div id="text18" style="font-size: 18px;font-family: Source Han Sans CN;font-weight: 400;color: #333333;">(230521)飞入地土地利用现状一级分类面积按权属性质汇总表.xls</div>
+                        </div>
+                    </div>
+                    <div style="width: 919px;height: 1px;background: #E8E8E8;margin: 0 auto;"></div>
+                    <div style="display: flex;align-items: center;justify-content: flex-start;padding: 30px 50px;">
+                        <div onclick=down1(text19) style="display: flex;align-items: center;justify-content: center;">
+                            <img src="./img/exlce.png" alt="">
+                            <div id="text19" style="font-size: 18px;font-family: Source Han Sans CN;font-weight: 400;color: #333333;">(230521)飞入地土地利用现状分类面积汇总表.xls</div>
+                        </div>
+                        <div onclick=down1(text20) style="display: flex;align-items: center;justify-content: center;margin-left: 80px;">
+                            <img src="./img/exlce.png" alt="">
+                            <div id="text20" style="font-size: 18px;font-family: Source Han Sans CN;font-weight: 400;color: #333333;">(230521)飞入地城镇村及工矿用地面积汇总表.xlsx</div>
+                        </div>
+                    </div>
+                    <div style="width: 919px;height: 1px;background: #E8E8E8;margin: 0 auto;"></div>
+                 
+                </div>
+                <div id="show7_" style="display: none;">
+                    <div style="display: flex;align-items: center;justify-content: flex-start;padding: 30px 50px;">
+                        <div onclick=down1(text21) style="display: flex;align-items: center;justify-content: center;">
+                            <img src="./img/exlce.png" alt="">
+                            <div id="text21" style="font-size: 18px;font-family: Source Han Sans CN;font-weight: 400;color: #333333;">(230521)工业用地按类型汇总统计表.xls</div>
+                        </div>
+                        <div onclick=down1(text22) style="display: flex;align-items: center;justify-content: center;margin-left: 140px;">
+                            <img src="./img/exlce.png" alt="">
+                            <div id="text22" style="font-size: 18px;font-family: Source Han Sans CN;font-weight: 400;color: #333333;">(230521)城镇村及工矿用地面积汇总表.xlsx</div>
+                        </div>
+                    </div>
+                    <div style="width: 919px;height: 1px;background: #E8E8E8;margin: 0 auto;"></div>
+                    <div style="display: flex;align-items: center;justify-content: flex-start;padding: 30px 50px;">
+                        <div onclick=down1(text23) style="display: flex;align-items: center;justify-content: center;">
+                            <img src="./img/exlce.png" alt="">
+                            <div id="text23" style="font-size: 18px;font-family: Source Han Sans CN;font-weight: 400;color: #333333;">(230521)部分细化地类面积汇总表.xls</div>
+                        </div>
+                      
+                    </div>
+                    <div style="width: 919px;height: 1px;background: #E8E8E8;margin: 0 auto;"></div>
+                 
+                </div>
+                <button id="close" style="width: 100px;height: 50px;border-radius: 5px;font-size: 18px;position: absolute;bottom: 10px;left: 80%;">关闭</button>
+            </div>
             <select name="" id="leibie">
                 <option value="null" disabled selected hidden>请选择</option>
                 <option value="标识码">标识码</option>
@@ -100,8 +285,107 @@
     <script src="./js/dic.js"></script>
     <script src="./js/jquery.treeview.js"></script>
     <script type="text/javascript" src="./js/jquery.sPage.js"></script>
-    <script src="./js/config.js"></script>
+    <script src="./js/config.js">
+    
+    </script>
     <script src="./js/main.js"></script>
     <script src="./js/tifx.js"></script> 
+    <script>
+        console.log(config.ip)
+        function down1(a) {
+            console.log(a.innerText)
+            window.location.href = config.ip + config.port + '/excel/'+ a.innerText
+        }
+        var show1 = document.getElementById('show1');
+        var show2 = document.getElementById('show2');
+        var show3 = document.getElementById('show3');
+        var show4 = document.getElementById('show4');
+        var show5 = document.getElementById('show5');
+        var show6 = document.getElementById('show6');
+        var show7 = document.getElementById('show7');
+        var hzbg = document.getElementById('hzbg');
+        var close1 = document.getElementById('close');
+        // var box = document.getElementById('box');
+        hzbg.onclick = function(){
+            document.getElementById("showtable").style.display="block";
+            document.getElementById("box").style.display="block";
+        }
+        close1.onclick = function(){
+            document.getElementById("showtable").style.display="none";
+            document.getElementById("box").style.display="none";
+        }
+        show1.onclick = function(){
+            document.getElementById("show1_").style.display="block";
+            document.getElementById("show2_").style.display="none";
+            document.getElementById("show3_").style.display="none";
+            document.getElementById("show4_").style.display="none";
+            document.getElementById("show5_").style.display="none";
+            document.getElementById("show6_").style.display="none";
+            document.getElementById("show6_").style.display="none";
+            document.getElementById("show7_").style.display="none";
+            $(this).addClass('class_name').siblings('div').removeClass('class_name')
+        }
+        show2.onclick = function(){
+            document.getElementById("show1_").style.display="none";
+            document.getElementById("show2_").style.display="block";
+            document.getElementById("show3_").style.display="none";
+            document.getElementById("show4_").style.display="none";
+            document.getElementById("show5_").style.display="none";
+            document.getElementById("show6_").style.display="none";
+            document.getElementById("show7_").style.display="none";
+            $(this).addClass('class_name').siblings('div').removeClass('class_name')
+        }
+        show3.onclick = function(){
+            document.getElementById("show1_").style.display="none";
+            document.getElementById("show2_").style.display="none";
+            document.getElementById("show3_").style.display="block";
+            document.getElementById("show4_").style.display="none";
+            document.getElementById("show5_").style.display="none";
+            document.getElementById("show6_").style.display="none";
+            document.getElementById("show6_").style.display="none";
+            document.getElementById("show7_").style.display="none";
+            $(this).addClass('class_name').siblings('div').removeClass('class_name')
+        }
+        show4.onclick = function(){
+            document.getElementById("show1_").style.display="none";
+            document.getElementById("show2_").style.display="none";
+            document.getElementById("show3_").style.display="none";
+            document.getElementById("show4_").style.display="block";
+            document.getElementById("show5_").style.display="none";
+            document.getElementById("show6_").style.display="none";
+            document.getElementById("show7_").style.display="none";
+            $(this).addClass('class_name').siblings('div').removeClass('class_name')
+        }
+        show5.onclick = function(){
+            document.getElementById("show1_").style.display="none";
+            document.getElementById("show2_").style.display="none";
+            document.getElementById("show3_").style.display="none";
+            document.getElementById("show4_").style.display="none";
+            document.getElementById("show5_").style.display="block";
+            document.getElementById("show6_").style.display="none";
+            document.getElementById("show7_").style.display="none";
+            $(this).addClass('class_name').siblings('div').removeClass('class_name')
+        }
+        show6.onclick = function(){
+            document.getElementById("show1_").style.display="none";
+            document.getElementById("show2_").style.display="none";
+            document.getElementById("show3_").style.display="none";
+            document.getElementById("show4_").style.display="none";
+            document.getElementById("show5_").style.display="none";
+            document.getElementById("show6_").style.display="block";
+            document.getElementById("show7_").style.display="none";
+            $(this).addClass('class_name').siblings('div').removeClass('class_name')
+        }
+        show7.onclick = function(){
+            document.getElementById("show1_").style.display="none";
+            document.getElementById("show2_").style.display="none";
+            document.getElementById("show3_").style.display="none";
+            document.getElementById("show4_").style.display="none";
+            document.getElementById("show5_").style.display="none";
+            document.getElementById("show6_").style.display="none";
+            document.getElementById("show7_").style.display="block";
+            $(this).addClass('class_name').siblings('div').removeClass('class_name')
+        }
+    </script>
 </body>
 </html>

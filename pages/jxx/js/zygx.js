@@ -62,11 +62,22 @@ $.ajax({
   async: false,
   // xhrFields:{withCredentials:true},
   success:function(data){
-    
+    console.log(data)
+
     TB_DLTBPHYSICS.fuPojo = data[data.length-1]
-    // console.log(TB_DLTBPHYSICS.fuPojo)
-    var lastValue = data[data.length-1].updatetime.slice(0,11)
-    $(".time-text").html(lastValue);
+    // console.log(TB_DLTBPHYSICS.fuPojo)\
+    var a = '<span style="background:#2ed9fe;color:#fff;letter-spacing:3px;border-radius:2px;">'+data[data.length-1].version+'</span>'
+    var b ='<span style="background:#08e6ce;color:#fff;letter-spacing:3px;border-radius:2px;">'+data[data.length-1].version+'</span>'
+        if(data[data.length-1].version=='三调'){
+          var lastValue = data[data.length-1].updatetime.slice(0,11) + b
+          $(".time-text").html(lastValue);
+            // value1[0].innerHTML=className + b
+        } else {
+          var lastValue1 = data[data.length-1].updatetime.slice(0,11) + a
+          $(".time-text").html(lastValue1);
+        }
+    
+   
     $(".time-text").click(function(){
 
       var display = $(".cc2").css("display");
@@ -77,7 +88,7 @@ $.ajax({
           ]
         data.forEach(e => {
           a = e.updatetime.slice(0,11)
-          $(".cc2").append(`<ul><li class="${a}" type="${a}" style="padding:5px" id="sendtimeid"><img src="./img/timeicon.png"/>&nbsp;${a}</li></ul>`);
+          $(".cc2").append(`<ul><li class="${a}" type="${a}" style="padding:5px" id="sendtimeid"><img src="./img/timeicon.png"/>&nbsp;${a} <span style="background:${e.version=='三调'?'#08e6ce':'#2ed9fe'};color:#fff;letter-spacing:3px;border-radius:2px;">${e.version}</span></li></ul>`);
           var timeObj = e
           clicktime(a,timeObj)
         })

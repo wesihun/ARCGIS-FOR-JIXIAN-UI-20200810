@@ -84,4 +84,9 @@ $(document).ready(function(){
 $('#dcsj').on('click',function(){
   location.href = config.newip+config.newport+'/arcgis/Other/Export?jsontree='+json+'&exclename='+nameche;
 });  
+$('#hzbg').on('click',function(){
+  
+  // location.href = config.newip+config.newport+'/arcgis/Other/Export?jsontree='+json+'&exclename='+nameche;
+});  
+
 });
