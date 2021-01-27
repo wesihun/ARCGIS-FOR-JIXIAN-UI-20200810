@@ -13,25 +13,25 @@ $(document).ready(function(){
       PDclick();
     });
     $("#time1").html(newTime());
-    $.ajax({
-        url:config.ip + config.port + '/getMenue',
-        type: 'POST',
-        async: false,
-        xhrFields:{withCredentials:true},
-        success:function(data){
-               //形成树菜单
-               tree(data,".qone");
-               $("#browser").treeview();
-                //滑块移动事件
-               huakuaiMove(".dcd1");
-                //点击变色事件
-               caidanChangeColor(".dcd");
-                //点击查询
-               queryCd(".fone",".sone","#browser",data);
-                //点击tree 获取id
-               clicktreeById();
-        }
-    });
+    // $.ajax({
+    //     url:config.ip + config.port + '/getMenue',
+    //     type: 'POST',
+    //     async: false,
+    //     xhrFields:{withCredentials:true},
+    //     success:function(data){
+    //            //形成树菜单
+    //            tree(data,".qone");
+    //            $("#browser").treeview();
+    //             //滑块移动事件
+    //            huakuaiMove(".dcd1");
+    //             //点击变色事件
+    //            caidanChangeColor(".dcd");
+    //             //点击查询
+    //            queryCd(".fone",".sone","#browser",data);
+    //             //点击tree 获取id
+    //            clicktreeById();
+    //     }
+    // });
     $("#gb-p1").click(function(){
       $(".theone").css("display","none");
     });
@@ -63,7 +63,25 @@ $.ajax({
   // xhrFields:{withCredentials:true},
   success:function(data){
     console.log(data)
-
+    $.ajax({
+      url:config.ip + config.port + '/getMenue?version='+data[data.length-1].version+'',
+      type: 'POST',
+      async: false,
+      xhrFields:{withCredentials:true},
+      success:function(data){
+             //形成树菜单
+             tree(data,".qone");
+             $("#browser").treeview();
+              //滑块移动事件
+             huakuaiMove(".dcd1");
+              //点击变色事件
+             caidanChangeColor(".dcd");
+              //点击查询
+             queryCd(".fone",".sone","#browser",data);
+              //点击tree 获取id
+             clicktreeById(data[data.length-1].version);
+      }
+  });
     TB_DLTBPHYSICS.fuPojo = data[data.length-1]
     // console.log(TB_DLTBPHYSICS.fuPojo)\
     var a = '<span style="background:#2ed9fe;color:#fff;letter-spacing:3px;border-radius:2px;">'+data[data.length-1].version+'</span>'

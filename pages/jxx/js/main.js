@@ -134,6 +134,26 @@ var clicktime = (className,timeObj)=>{
         // console.log(TB_DLTBPHYSICS.fuPojo)
         $('.'+className).css("color","blue");
         var value1 = document.getElementsByClassName("time-text");//获取值
+        $.ajax({
+            url:config.ip + config.port + '/getMenue?version='+timeObj.version+'',
+            type: 'POST',
+            async: false,
+            xhrFields:{withCredentials:true},
+            success:function(data){
+                   //形成树菜单
+                   $('ul li').remove()
+                   tree(data,".qone");
+                   $("#browser").treeview();
+                    //滑块移动事件
+                   huakuaiMove(".dcd1");
+                    //点击变色事件
+                   caidanChangeColor(".dcd");
+                    //点击查询
+                   queryCd(".fone",".sone","#browser",data);
+                    //点击tree 获取id
+                   clicktreeById();
+            }
+        });
         var a = '<span style="background:#2ed9fe;color:#fff;letter-spacing:3px;border-radius:2px;">'+timeObj.version+'</span>'
         var b ='<span style="background:#08e6ce;color:#fff;letter-spacing:3px;border-radius:2px;">'+timeObj.version+'</span>'
         if(timeObj.version=='三调'){
@@ -293,7 +313,7 @@ function treetjfx(data,className){
            url:config.ip + config.port + '/getSecondCategory',
            type: 'POST',
            async: false,
-           data:{menueid:menueid},
+           data:{menueid:menueid,version:TB_DLTBPHYSICS.fuPojo.version},
            xhrFields:{withCredentials:true},
            success:function(data){
            for(var j=0;j<data.length;j++){
@@ -323,7 +343,7 @@ function treetjfx(data,className){
         var sfqx = $(".file,.folder");
         huakuaiMove(".folder");
         caidanChangeColor(".dcd");
-        clicktreeById()
+        clicktreeById(a)
         var glo = [];
         sfqx.css("color","black");
         if(fone == ""){
@@ -978,7 +998,7 @@ $('.dcd1,.dcd').on('click',function(){
     }); 
     };
  //点击tree 获取id
- function clicktreeById(){
+ function clicktreeById(a){
     $(".dcd1,.dcd").click(function(){
        var menueid = $(this).attr("menueid");
        if(menueid == 1){
@@ -990,7 +1010,7 @@ $('.dcd1,.dcd').on('click',function(){
           $.ajax({
              url:config.ip + config.port + '/getSecondCategory',
              type: 'POST',
-             data:{menueid:menueid},
+             data:{menueid:menueid,version:TB_DLTBPHYSICS.fuPojo.version},
              xhrFields:{withCredentials:true},
              success:function(data){
                 left = data;

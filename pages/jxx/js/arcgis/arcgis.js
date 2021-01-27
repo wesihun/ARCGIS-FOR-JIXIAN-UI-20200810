@@ -244,7 +244,8 @@ function messageBox(feature) {//信息框
 
 function queryDLTB(data, menue, rightMenue){//点击左侧树
     if(data.length <=0){//叶子节点
-        $.ajax({url:config.ip + config.port + '/getMenueByMenueId', type: 'POST', data:{menueid:menue.menueid}, xhrFields:{withCredentials:true}, success:function(result) {
+        console.log(TB_DLTBPHYSICS.fuPojo.version)
+        $.ajax({url:config.ip + config.port + '/getMenueByMenueId', type: 'POST', data:{menueid:menue.menueid,version:TB_DLTBPHYSICS.fuPojo.version}, xhrFields:{withCredentials:true}, success:function(result) {
             var newMenue = new Array();
             newMenue.push({'menueid':result.menueid, 'menuename':result.menuename, 'firstcategoryCode':result.firstcategory, 'secondcategoryCode':result.secondcategory, 'secondcategoryName':''});
             
