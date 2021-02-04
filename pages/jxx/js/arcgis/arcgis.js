@@ -243,14 +243,16 @@ function messageBox(feature) {//信息框
 }
 
 function queryDLTB(data, menue, rightMenue){//点击左侧树
+    console.log(data)
     if(data.length <=0){//叶子节点
         console.log(TB_DLTBPHYSICS.fuPojo.version)
         $.ajax({url:config.ip + config.port + '/getMenueByMenueId', type: 'POST', data:{menueid:menue.menueid,version:TB_DLTBPHYSICS.fuPojo.version}, xhrFields:{withCredentials:true}, success:function(result) {
+
             var newMenue = new Array();
             newMenue.push({'menueid':result.menueid, 'menuename':result.menuename, 'firstcategoryCode':result.firstcategory, 'secondcategoryCode':result.secondcategory, 'secondcategoryName':''});
             
             global_data=newMenue;//全局二级分类数据
-
+            console.log(newMenue)
             $.ajax({url:GEOSERVER.IP + GEOSERVER.PORT + '/getDLTB', type: 'POST', data:{"jsonMenue":JSON.stringify(newMenue), "proviceCode":getCountryCode(rightMenue),'tablename':TB_DLTBPHYSICS.fuPojo.tablename}, xhrFields:{withCredentials:true}, success:function(resultData){
                 queryDltbByObjectID(resultData);//根据OBJECTID查询图斑并高亮
             }});
@@ -317,6 +319,7 @@ function queryDltbByObjectID(result){//根据OBJECTID查询图斑并高亮
 
 function createBingReport(data, menuename, rightMenue){
     $.ajax({url:GEOSERVER.IP + GEOSERVER.PORT + '/getSecondCategoryCode', type: 'POST', data:{"jsonMenue":JSON.stringify(data), "proviceCode":getCountryCode(rightMenue),'tablename':TB_DLTBPHYSICS.fuPojo.tablename}, xhrFields:{withCredentials:true}, success:function(result) {
+        console.log(JSON.stringify(data))
         console.log({url:GEOSERVER.IP + GEOSERVER.PORT + '/getSecondCategoryCode', type: 'POST', data:{"jsonMenue":JSON.stringify(data), "proviceCode":getCountryCode(rightMenue),'tablename':TB_DLTBPHYSICS.fuPojo.tablename}})
         var legendData = "[";
         var seriesData = "["

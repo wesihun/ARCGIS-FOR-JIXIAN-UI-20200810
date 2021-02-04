@@ -305,9 +305,11 @@ function treetjfx(data,className){
    };
    //获取菜单最底层信息
    function pushArry(arr){
+       console.log('ahkjdashk')
     var gloArr = [];
     for(var i=0;i<arr.length;i++){
-       if(arr[i].secondcategory == ""){
+        // console.log()
+       if(!arr[i].secondcategory){
           var menueid = arr[i].menueid;
            $.ajax({
            url:config.ip + config.port + '/getSecondCategory',
@@ -316,6 +318,7 @@ function treetjfx(data,className){
            data:{menueid:menueid,version:TB_DLTBPHYSICS.fuPojo.version},
            xhrFields:{withCredentials:true},
            success:function(data){
+               console.log(data)
            for(var j=0;j<data.length;j++){
               if(data[j].secondcategory == ""){
                   pushArry(data);
@@ -1001,6 +1004,7 @@ $('.dcd1,.dcd').on('click',function(){
  function clicktreeById(a){
     $(".dcd1,.dcd").click(function(){
        var menueid = $(this).attr("menueid");
+       console.log(menueid)
        if(menueid == 1){
           return;
        }else{
@@ -1014,7 +1018,7 @@ $('.dcd1,.dcd').on('click',function(){
              xhrFields:{withCredentials:true},
              success:function(data){
                 left = data;
-
+                console.log(pushArry(data))
                 queryDLTB(pushArry(data), click_Inf, right); 
              }
           });
