@@ -84,14 +84,14 @@ $.ajax({
   });
     TB_DLTBPHYSICS.fuPojo = data[data.length-1]
     // console.log(TB_DLTBPHYSICS.fuPojo)\
-    var a = '<span style="background:#2ed9fe;color:#fff;letter-spacing:3px;border-radius:2px;">'+data[data.length-1].version+'</span>'
-    var b ='<span style="background:#08e6ce;color:#fff;letter-spacing:3px;border-radius:2px;">'+data[data.length-1].version+'</span>'
+    var a = '<span style="background:#fff;color:#fff;letter-spacing:3px;border-radius:2px;">'+data[data.length-1].version+'</span>'
+    var b ='<span style="background:#fff;color:#fff;letter-spacing:3px;border-radius:2px;">'+data[data.length-1].version+'</span>'
         if(data[data.length-1].version=='三调'){
-          var lastValue = data[data.length-1].updatetime.slice(0,11) + b
+          var lastValue = data[data.length-1].title + b
           $(".time-text").html(lastValue);
             // value1[0].innerHTML=className + b
         } else {
-          var lastValue1 = data[data.length-1].updatetime.slice(0,11) + a
+          var lastValue1 = data[data.length-1].title + a
           $(".time-text").html(lastValue1);
         }
     
@@ -105,8 +105,8 @@ $.ajax({
         {id: 0, serviceaddr: null, databasename: null, tablename: null, type: 0,updatetime: "2020-11-09 00:00:00"}
           ]
         data.forEach(e => {
-          a = e.updatetime.slice(0,11)
-          $(".cc2").append(`<ul><li class="${a}" type="${a}" style="padding:5px" id="sendtimeid"><img src="./img/timeicon.png"/>&nbsp;${a} <span style="background:${e.version=='三调'?'#08e6ce':'#2ed9fe'};color:#fff;letter-spacing:3px;border-radius:2px;">${e.version}</span></li></ul>`);
+          a = e.title
+          $(".cc2").append(`<ul><li class="${a}" type="${a}" style="padding:5px" id="sendtimeid"><img src="./img/timeicon.png"/>&nbsp;${a} <span style="background:${e.version=='三调'?'#fff':'#fff'};color:#fff;letter-spacing:3px;border-radius:2px;">${e.version}</span></li></ul>`);
           var timeObj = e
           clicktime(a,timeObj)
         })

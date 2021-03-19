@@ -422,7 +422,7 @@ function treetjfx(data,className){
       $(".cc2").children().remove();
     if(aResult){
       aResult.forEach(e => {
-        a = e.updatetime.slice(0,11)
+        a = e.title
         $(".cc2").append(`<ul><li class="${a}" type="${a}" style="padding:10px" id="sendtimeid"><img src="./img/timeicon.png"/>&nbsp;${a}</li></ul>`);
         var timeObj = e
         clicktime_2(a,timeObj)
@@ -465,7 +465,7 @@ $('.dcd1,.dcd').on('click',function(){
                 }, error:function() {}});
                 PHYSICSTABLE_POJO.fuResult = aResult[aResult.length-1]
                 var lastValue = aResult[aResult.length-1].updatetime.slice(0,11)
-                $(".time-text1").html(lastValue);
+                $(".time-text1").html(aResult[aResult.length-1].title);
                 // return aResult;
             }
 

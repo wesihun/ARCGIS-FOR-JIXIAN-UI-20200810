@@ -71,7 +71,7 @@ $(document).ready(function(){
       if(display == "none"){
         $(".cc2").children().remove();
         tablephysicsdata.forEach(e => {
-          a = e.updatetime.slice(0,11)
+          a = e.title
           $(".cc2").append(`<ul><li class="${a}" type="${a}" style="padding:10px" id="sendtimeid"><img src="./img/timeicon.png"/>&nbsp;${a}</li></ul>`);
           var timeObj = e
           clicktime_2(a,timeObj)
@@ -94,7 +94,7 @@ $(document).ready(function(){
                 PHYSICSTABLE_POJO.fuResult = tablephysicstable[tablephysicstable.length-1]
                 tablephysicsdata = tablephysicstable
                 var lastValue = PHYSICSTABLE_POJO.fuResult.updatetime.slice(0,11)
-                $(".time-text").html(lastValue);
+                $(".time-text").html(PHYSICSTABLE_POJO.fuResult.title);
 
                 CURRENTSELECTMENUE = data.menuename;
             }
