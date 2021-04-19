@@ -122,7 +122,7 @@ function QueryClass(map, Map,on,ArcGISDynamicMapServiceLayer,SimpleLineSymbol,Si
     }
 
     function queryByGeometryResult(result) {
-        //map.graphics.clear();
+        map.graphics.clear();
 
         if(result.features == 0){alert("no features"); return;}
 
