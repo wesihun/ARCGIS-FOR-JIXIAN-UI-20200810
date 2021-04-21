@@ -89,7 +89,7 @@ $("#suresearch").click(function(){
     url:GEOSERVER.IP + GEOSERVER.PORT + '/get_dltb_by_qsdwmc?qsdwmc='+x.value+'&tablename='+TB_DLTBPHYSICS.fuPojo.tablename+'',
     type: 'POST',
     async: false,
-    // xhrFields:{withCredentials:true},
+    xhrFields:{withCredentials:true},
     success:function(data){
       console.log(data.length)
       if(data.length>0){
