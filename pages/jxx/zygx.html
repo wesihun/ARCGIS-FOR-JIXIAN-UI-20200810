@@ -62,7 +62,34 @@
                     <div class="map_35" title="选中地类报表"></div>
                     <div class="map_36" title="打印地图"></div>
                     <div class="map_37" title="绘制地块"></div>
+                    <div class="map_40" title="权属查询"></div>
                     <!-- <div class="map_38" title='地类面积筛选'></div> -->
+                </div>
+                <div id="search" style="position: absolute;left:60% ;top: 100px;z-index: 200;">
+                    <input id="inputs" type="text" style="height: 30px;">
+                    <button id="suresearch" style="background: #04C4DB;color: #FFFFFF;height: 30px;width: 40px;">搜索</button>
+                </div>
+                <div style="width: 865px;height: 372px;position: absolute;left:30% ;top: 200px;z-index: 200;">
+                    <div style="width: 855px;background: #D6E6F4;height: 34px;color: #114C7F;padding: 5px;display: flex;justify-content: space-between;align-items: center;">
+                        搜索结果
+                        <div style="font-size: 24px;">×</div>
+                    </div>
+                    <div style="background: #FFFFFF;height: 100%;">
+                        <table id="tab"  class="apply-table">
+                            <thead >
+                                <tr style="height: 40px;">
+                                    <td style="width: 120px;height: 40px;color: #333;">序号</td>
+                                    <td style="width: 140px;height: 40px;color: #333;">标识码</td>
+                                    <td style="width: 130px;height: 40px;color: #333;">要素代码</td>
+                                    <td style="width: 130px;height: 40px;color: #333;">地类编码</td>
+                                    <td style="width: 160px;height: 40px;color: #333;">权属单位代码</td>
+                                    <td style="width: 160px;height: 40px;color: #333;">权属单位名称</td>
+                               </tr>   
+                            </thead>
+                            <tbody>
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
                 <!-- 日期选择 -->
                 <div class="select-time">

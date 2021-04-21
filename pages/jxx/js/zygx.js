@@ -55,6 +55,28 @@ $("#gb-zhu").click(function(){
     brry = 0;
   };
 });
+$("#suresearch").click(function(){
+  // brry = 0;
+  // $(".zhu").css("display","none");
+  // brry = 1;
+  // if(arry==1){
+  //   $(".map01_35").attr("class","map_35");
+  //   arry=0;
+  //   brry = 0;
+  // };
+  var x=  document.getElementById("inputs")
+  $.ajax({
+    url:config.ip + config.port + '/get_dltb_by_qsdwmc?qsdwmc='+x.value+'&tablename='+TB_DLTBPHYSICS.fuPojo.tablename+'',
+    type: 'POST',
+    async: false,
+    // xhrFields:{withCredentials:true},
+    success:function(data){
+      console.log(data)
+    }
+  })
+  // console.log()
+
+});
 tishi();
 $.ajax({
   url:config.ip + config.port + '/getAllDLTBServiceVersion?type=1',
