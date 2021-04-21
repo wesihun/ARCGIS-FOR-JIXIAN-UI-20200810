@@ -97,6 +97,9 @@ $("#suresearch").click(function(){
         for(var i = 0; i < data.length; i++) {
           console.log('jjj')
           xh++;
+          if(!data[i].czcsxm){
+            data[i].czcsxm = '';
+          }
           $("#tab").append("<tr> style=height: 40px;"
             +'<td style="width: 120px;height: 40px;color: #333;">'+data[i].objectid+'</td>'
             +'<td style="width: 140px;height: 40px;color: #333;">'+data[i].bsm+'</td>'
@@ -104,6 +107,8 @@ $("#suresearch").click(function(){
             +'<td style="width: 130px;height: 40px;color: #333;">'+data[i].dlbm+'</td>'
             +'<td style="width: 160px;height: 40px;color: #333;">'+data[i].qsdwdm+'</td>'
             +'<td style="width: 160px;height: 40px;color: #333;">'+data[i].qsdwmc+'</td>'
+            +'<td style="width: 160px;height: 40px;color: #333;">'+data[i].tbmj+'</td>'
+            +'<td style="width: 160px;height: 40px;color: #333;">'+data[i].czcsxm+'</td>'
           +"</tr>");         
       };  
       }else{
