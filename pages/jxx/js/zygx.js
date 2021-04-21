@@ -55,7 +55,26 @@ $("#gb-zhu").click(function(){
     brry = 0;
   };
 });
+  document.getElementById("isnshow").style.display="none";
+  document.getElementById("search").style.display="none";
+  document.getElementById("searchmain").style.display="none";
+$("#isshow").click(function(){
+  document.getElementById("isshow").style.display="none";
+  document.getElementById("isnshow").style.display="inline-block";
+  document.getElementById("search").style.display="block";
+  document.getElementById("searchmain").style.display="block";
+})
+$("#isnshow").click(function(){
+  document.getElementById("isnshow").style.display="none";
+  document.getElementById("isshow").style.display="inline-block";
+  document.getElementById("search").style.display="none";
+  document.getElementById("searchmain").style.display="none";
+})
+$("#instable").click(function(){
+  document.getElementById("searchmain").style.display="none";
+})
 $("#suresearch").click(function(){
+  document.getElementById("searchmain").style.display="block";
   // brry = 0;
   // $(".zhu").css("display","none");
   // brry = 1;
@@ -64,14 +83,34 @@ $("#suresearch").click(function(){
   //   arry=0;
   //   brry = 0;
   // };
+  $('#tab').empty()
   var x=  document.getElementById("inputs")
   $.ajax({
-    url:config.ip + config.port + '/get_dltb_by_qsdwmc?qsdwmc='+x.value+'&tablename='+TB_DLTBPHYSICS.fuPojo.tablename+'',
+    url:GEOSERVER.IP + GEOSERVER.PORT + '/get_dltb_by_qsdwmc?qsdwmc='+x.value+'&tablename='+TB_DLTBPHYSICS.fuPojo.tablename+'',
     type: 'POST',
     async: false,
     // xhrFields:{withCredentials:true},
     success:function(data){
-      console.log(data)
+      console.log(data.length)
+      if(data.length>0){
+        var xh = 0;
+        for(var i = 0; i < data.length; i++) {
+          console.log('jjj')
+          xh++;
+          $("#tab").append("<tr> style=height: 40px;"
+            +'<td style="width: 120px;height: 40px;color: #333;">'+data[i].objectid+'</td>'
+            +'<td style="width: 140px;height: 40px;color: #333;">'+data[i].bsm+'</td>'
+            +'<td style="width: 130px;height: 40px;color: #333;">'+data[i].ysdm+'</td>'
+            +'<td style="width: 130px;height: 40px;color: #333;">'+data[i].dlbm+'</td>'
+            +'<td style="width: 160px;height: 40px;color: #333;">'+data[i].qsdwdm+'</td>'
+            +'<td style="width: 160px;height: 40px;color: #333;">'+data[i].qsdwmc+'</td>'
+          +"</tr>");         
+      };  
+      }else{
+        console.log('dsd')
+        $("#tab").innerHtml='无数据'
+      }
+
     }
   })
   // console.log()
