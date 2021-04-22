@@ -59,15 +59,19 @@ $("#gb-zhu").click(function(){
   document.getElementById("isnshow1").style.display="none";
   document.getElementById("search").style.display="none";
   document.getElementById("searchmain").style.display="none";
-  document.getElementById("searchmain1").style.display="none";
-$("#isshow1").click(function(){
+$("#isshow1").click(function(){ //选中，圈地类
   document.getElementById("isshow1").style.display="none";
   document.getElementById("isnshow1").style.display="inline-block";
-  
+
+    drawPolygonToWrite(globalQueryClass.Draw,globalQueryClass.map,globalQueryClass.SimpleLineSymbol,globalQueryClass.SimpleFillSymbol,globalQueryClass.Color,globalQueryClass.Graphic,globalQueryClass.on,globalQueryClass.Point,globalQueryClass.TextSymbol,globalQueryClass.Font,globalQueryClass.graphicsLayer,globalQueryClass.Query, globalQueryClass.FeatureLayer);//圈地类,画面图形
+
 })
-$("#isnshow1").click(function(){
+$("#isnshow1").click(function(){ //反选，圈地类
   document.getElementById("isnshow1").style.display="none";
   document.getElementById("isshow1").style.display="inline-block";
+
+    removeGraphics(globalQueryClass.map, DRAWGRAPHICS);//移除画好的几何图形
+    removeToolbarDrao();//取消画图工具
 })
 $("#isshow").click(function(){
   document.getElementById("isshow").style.display="none";
