@@ -59,6 +59,7 @@ $("#gb-zhu").click(function(){
   document.getElementById("isnshow1").style.display="none";
   document.getElementById("search").style.display="none";
   document.getElementById("searchmain").style.display="none";
+  document.getElementById("searchmain1").style.display="none";
 $("#isshow1").click(function(){ //选中，圈地类
   document.getElementById("isshow1").style.display="none";
   document.getElementById("isnshow1").style.display="inline-block";

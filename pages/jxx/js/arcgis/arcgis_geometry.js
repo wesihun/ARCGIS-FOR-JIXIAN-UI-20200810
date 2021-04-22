@@ -211,7 +211,11 @@ function drawPolygonToWrite(Draw, map, SimpleLineSymbol, SimpleFillSymbol, Color
                 console.log(features[i].attributes.objectid);
                 arr.push(features[i].attributes);
 
+
+
             }
+
+            changList(arr);
             queryDltbByObjectID(arr);//权属查询，结果在地图高亮显示，2021年4月16日需求
         }
 
