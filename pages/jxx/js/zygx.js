@@ -56,14 +56,25 @@ $("#gb-zhu").click(function(){
   };
 });
   document.getElementById("isnshow").style.display="none";
+  document.getElementById("isnshow1").style.display="none";
   document.getElementById("search").style.display="none";
   document.getElementById("searchmain").style.display="none";
+$("#isshow1").click(function(){
+  document.getElementById("isshow1").style.display="none";
+  document.getElementById("isnshow1").style.display="inline-block";
+  
+})
+$("#isnshow1").click(function(){
+  document.getElementById("isnshow1").style.display="none";
+  document.getElementById("isshow1").style.display="inline-block";
+})
 $("#isshow").click(function(){
   document.getElementById("isshow").style.display="none";
   document.getElementById("isnshow").style.display="inline-block";
   document.getElementById("search").style.display="block";
   document.getElementById("searchmain").style.display="block";
 })
+
 $("#isnshow").click(function(){
   document.getElementById("isnshow").style.display="none";
   document.getElementById("isshow").style.display="inline-block";
@@ -114,10 +125,8 @@ $("#suresearch").click(function(){
           +"</tr>");         
       };  
       }else{
-        console.log('dsd')
         $("#tab").innerHtml='无数据'
       }
-
     }
   })
   // console.log()

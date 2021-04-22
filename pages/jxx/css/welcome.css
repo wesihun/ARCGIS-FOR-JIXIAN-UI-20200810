@@ -257,7 +257,7 @@ table,tr,th,td{
 }
 .xgj{
     display: inline-block;
-    width: 590px;
+    width: 600px;
     height:30px;
     background: #04c4db;
     position: absolute;
@@ -348,14 +348,14 @@ table,tr,th,td{
     display: inline-block;
     height:18px;
     width: 22px;
-    margin-left:15px;
+    margin-left:12px;
     margin-top:5px;
 }
 .map_43{
     display: inline-block;
     height:18px;
     width: 22px;
-    margin-left:15px;
+    margin-left:12px;
     margin-top:5px;
 }
 .map_12{
