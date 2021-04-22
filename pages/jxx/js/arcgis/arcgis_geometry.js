@@ -175,3 +175,46 @@ function rotateGraphic(graphic, Edit){//旋转图形
     edit.activate(Edit.ROTATE, graphic)
 }
 
+
+function drawPolygonToWrite(Draw, map, SimpleLineSymbol, SimpleFillSymbol, Color, Graphic,on,Point, TextSymbol,Font,graphicsLayer,Query,FeatureLayer) {//画面图形，圈地类
+    var toolbar = new Draw(map, {showTooltips: true});
+    TOOLBAR = toolbar;
+
+    var lineSymbol = new SimpleLineSymbol(SimpleLineSymbol.STYLE_DASH, new Color([255, 0, 0]), 3);
+    var fill = SimpleFillSymbol(SimpleFillSymbol.STYLE_SOLID, lineSymbol,  new Color([0, 255, 0,0.3]));
+
+    toolbar.activate(Draw.FREEHAND_POLYGON, {showTooltips:true});
+
+    on(toolbar, "draw-complete", function (result){
+        var geometry = result.geometry;
+
+        var graphic = new Graphic(geometry, fill);
+
+        map.graphics.add(graphic);
+        // toolbar.deactivate();
+
+        //---------------------圈地类--------------------------
+        var query = new Query();
+        query.geometry = geometry.getExtent();
+
+        var featureLayer = new FeatureLayer("http://localhost:6080/arcgis/rest/services/jixian/DLTB/FeatureServer/0", {mode:FeatureLayer.MODE_SNAPSHOT, outFields:["*"]});
+        featureLayer.queryFeatures(query, selectInBuffer);
+
+        function selectInBuffer(response)
+        {
+            var features = response.features;
+
+            for(var i=0;i<features.length; i++)
+            {
+                console.log(features[i].attributes.objectid);
+                // map.graphics.clear();
+            }
+
+
+        }
+
+
+
+
+    });
+}
