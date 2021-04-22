@@ -207,7 +207,6 @@ function drawPolygonToWrite(Draw, map, SimpleLineSymbol, SimpleFillSymbol, Color
             for(var i=0;i<features.length; i++)
             {
                 console.log(features[i].attributes.objectid);
-                // map.graphics.clear();
             }
 
 
