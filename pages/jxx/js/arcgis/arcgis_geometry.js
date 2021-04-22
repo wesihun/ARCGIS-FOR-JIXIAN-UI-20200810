@@ -213,7 +213,7 @@ function drawPolygonToWrite(Draw, map, SimpleLineSymbol, SimpleFillSymbol, Color
             }
 
             queryDltbByObjectID(arr);//权属查询，结果在地图高亮显示，2021年4月16日需求
-            changList(arr);
+            changList(arr);//调用表格窗口。
         }
 
 
