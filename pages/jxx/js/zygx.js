@@ -59,6 +59,7 @@ $("#gb-zhu").click(function(){
   document.getElementById("isnshow1").style.display="none";
   document.getElementById("search").style.display="none";
   document.getElementById("searchmain").style.display="none";
+  document.getElementById("searchmain1").style.display="none";
 $("#isshow1").click(function(){
   document.getElementById("isshow1").style.display="none";
   document.getElementById("isnshow1").style.display="inline-block";
@@ -83,6 +84,9 @@ $("#isnshow").click(function(){
 })
 $("#instable").click(function(){
   document.getElementById("searchmain").style.display="none";
+})
+$("#instable1").click(function(){
+  document.getElementById("searchmain1").style.display="none";
 })
 $("#suresearch").click(function(){
   document.getElementById("searchmain").style.display="block";
@@ -132,6 +136,36 @@ $("#suresearch").click(function(){
   // console.log()
 
 });
+function changList(arrList){
+  $('#tab1').empty()
+  // var arrList = []
+  document.getElementById("searchmain").style.display="block";
+  if(arrList.length>0){
+    queryDltbByObjectID(data);//权属查询，结果在地图高亮显示，2021年4月16日需求
+
+  var xh = 0;
+  for(var i = 0; i < arrList.length; i++) {
+    console.log('jjj')
+    xh++;
+    if(!arrList[i].czcsxm){
+      arrList[i].czcsxm = '';
+    }
+    $("#tab1").append("<tr> style=height: 40px;"
+      +'<td style="width: 132px;height: 40px;color: #333;">'+arrList[i].objectid+'</td>'
+      +'<td style="width: 132px;height: 40px;color: #333;">'+arrList[i].bsm+'</td>'
+      +'<td style="width: 132px;height: 40px;color: #333;">'+arrList[i].ysdm+'</td>'
+      +'<td style="width: 132px;height: 40px;color: #333;">'+arrList[i].dlbm+'</td>'
+      +'<td style="width: 132px;height: 40px;color: #333;">'+arrList[i].qsdwdm+'</td>'
+      +'<td style="width: 132px;height: 40px;color: #333;">'+arrList[i].qsdwmc+'</td>'
+      +'<td style="width: 132px;height: 40px;color: #333;">'+arrList[i].tbmj+'</td>'
+      +'<td style="width: 132px;height: 40px;color: #333;">'+arrList[i].czcsxm+'</td>'
+    +"</tr>");         
+  };  
+  }else{
+    $("#tab").innerHtml='无数据'
+  }
+}
+
 tishi();
 $.ajax({
   url:config.ip + config.port + '/getAllDLTBServiceVersion?type=1',
