@@ -69,7 +69,7 @@ $("#isshow1").click(function(){ //选中，圈地类
 $("#isnshow1").click(function(){ //反选，圈地类
   document.getElementById("isnshow1").style.display="none";
   document.getElementById("isshow1").style.display="inline-block";
-
+  document.getElementById("searchmain").style.display="none";
     removeGraphics(globalQueryClass.map, DRAWGRAPHICS);//移除画好的几何图形
     removeToolbarDrao();//取消画图工具
 })
