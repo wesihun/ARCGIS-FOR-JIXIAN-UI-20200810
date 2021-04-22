@@ -80,3 +80,7 @@
 table, tr, th, td {
     border: 1px #D6E6F4 solid;
 }
+.table-body{
+    overflow-y: scroll;
+    
+}

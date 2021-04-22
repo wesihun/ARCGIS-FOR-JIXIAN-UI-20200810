@@ -101,14 +101,14 @@ $("#suresearch").click(function(){
             data[i].czcsxm = '';
           }
           $("#tab").append("<tr> style=height: 40px;"
-            +'<td style="width: 120px;height: 40px;color: #333;">'+data[i].objectid+'</td>'
-            +'<td style="width: 140px;height: 40px;color: #333;">'+data[i].bsm+'</td>'
-            +'<td style="width: 130px;height: 40px;color: #333;">'+data[i].ysdm+'</td>'
-            +'<td style="width: 130px;height: 40px;color: #333;">'+data[i].dlbm+'</td>'
-            +'<td style="width: 160px;height: 40px;color: #333;">'+data[i].qsdwdm+'</td>'
-            +'<td style="width: 160px;height: 40px;color: #333;">'+data[i].qsdwmc+'</td>'
-            +'<td style="width: 160px;height: 40px;color: #333;">'+data[i].tbmj+'</td>'
-            +'<td style="width: 160px;height: 40px;color: #333;">'+data[i].czcsxm+'</td>'
+            +'<td style="width: 132px;height: 40px;color: #333;">'+data[i].objectid+'</td>'
+            +'<td style="width: 132px;height: 40px;color: #333;">'+data[i].bsm+'</td>'
+            +'<td style="width: 132px;height: 40px;color: #333;">'+data[i].ysdm+'</td>'
+            +'<td style="width: 132px;height: 40px;color: #333;">'+data[i].dlbm+'</td>'
+            +'<td style="width: 132px;height: 40px;color: #333;">'+data[i].qsdwdm+'</td>'
+            +'<td style="width: 132px;height: 40px;color: #333;">'+data[i].qsdwmc+'</td>'
+            +'<td style="width: 132px;height: 40px;color: #333;">'+data[i].tbmj+'</td>'
+            +'<td style="width: 132px;height: 40px;color: #333;">'+data[i].czcsxm+'</td>'
           +"</tr>");         
       };  
       }else{
