@@ -194,10 +194,12 @@ function drawPolygonToWrite(Draw, map, SimpleLineSymbol, SimpleFillSymbol, Color
         // toolbar.deactivate();
 
         //---------------------圈地类--------------------------
+        var arr = new Array();//构建数组，将地类数据放入数组中，方便调取高亮显示。
+
         var query = new Query();
         query.geometry = geometry.getExtent();
 
-        var featureLayer = new FeatureLayer("http://localhost:6080/arcgis/rest/services/jixian/DLTB/FeatureServer/0", {mode:FeatureLayer.MODE_SNAPSHOT, outFields:["*"]});
+        var featureLayer = new FeatureLayer(TB_DLTBPHYSICS.fuPojo.serviceaddr + "/0", {mode:FeatureLayer.MODE_SNAPSHOT, outFields:["*"]});
         featureLayer.queryFeatures(query, selectInBuffer);
 
         function selectInBuffer(response)
@@ -207,9 +209,10 @@ function drawPolygonToWrite(Draw, map, SimpleLineSymbol, SimpleFillSymbol, Color
             for(var i=0;i<features.length; i++)
             {
                 console.log(features[i].attributes.objectid);
+                arr.push(features[i].attributes);
+
             }
-
-
+            queryDltbByObjectID(arr);//权属查询，结果在地图高亮显示，2021年4月16日需求
         }
 
 
