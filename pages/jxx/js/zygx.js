@@ -89,10 +89,12 @@ $("#suresearch").click(function(){
     url:GEOSERVER.IP + GEOSERVER.PORT + '/get_dltb_by_qsdwmc?qsdwmc='+x.value+'&tablename='+TB_DLTBPHYSICS.fuPojo.tablename+'',
     type: 'POST',
     async: false,
-    // xhrFields:{withCredentials:true},
+    xhrFields:{withCredentials:true},
     success:function(data){
       console.log(data.length)
       if(data.length>0){
+          queryDltbByObjectID(data);//权属查询，结果在地图高亮显示，2021年4月16日需求
+
         var xh = 0;
         for(var i = 0; i < data.length; i++) {
           console.log('jjj')
