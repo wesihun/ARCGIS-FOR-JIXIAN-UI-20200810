@@ -916,15 +916,26 @@ $('.dcd1,.dcd').on('click',function(){
         };
     });
     //显示统计报表
-    $(".map_33").mousedown(function(ev){
-        $(".map_33").removeClass("map30");
-        $(".map_33").attr("class","map01_33");
-     });
-     $(".map_33").mouseup(function(ev){
-        $(".map_33").removeClass("map30");
-        $(".map01_33").attr("class","map_33");
-        exportReportPDF(globalQueryClass.map);//导出报表按钮
-     });
+    document.getElementById("isnbb").style.display="none";
+    document.getElementById("buttomone").style.display="none";
+    
+    $("#isbb").click(function(){
+        document.getElementById("isnbb").style.display="inline-block";
+        document.getElementById("isbb").style.display="none";
+        document.getElementById("buttomone").style.display="block";
+    });
+    $("#isnbb").click(function(){
+        document.getElementById("isnbb").style.display="none";
+        document.getElementById("isbb").style.display="inline-block";
+        document.getElementById("buttomone").style.display="none";
+    });
+     //选种类型导出报表
+     $("#getSexBtn").click(function(){
+        var unit = $("input[name=sex]:checked").val();
+        console.log(unit)
+        exportReportPDF(globalQueryClass.map,unit);   //导出报表按钮
+
+    });
     //显示区域报表图
     $(".map_35").click(function(){
         $(".map_35").removeClass("map30");

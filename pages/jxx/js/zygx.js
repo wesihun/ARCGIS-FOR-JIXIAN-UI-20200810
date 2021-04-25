@@ -3,40 +3,8 @@ var left = "";
 var zhanghu1;
 var arry=0;
 var brry=0;
-// function abc(dsfs)
-// {
-//   changList(dsfs);
-// }
-function changList(arrList){
-  $('#tab1').empty()
-  // var arrList = []
-  document.getElementById("searchmain1").style.display="block";
-  if(arrList.length>0){
-    // queryDltbByObjectID(data);//权属查询，结果在地图高亮显示，2021年4月16日需求
 
-  var xh = 0;
-  for(var i = 0; i < arrList.length; i++) {
-    console.log('jjj')
-    xh++;
-    if(!arrList[i].czcsxm){
-      arrList[i].czcsxm = '';
-    }
-    $("#tab1").append("<tr> style=height: 40px;"
-      +'<td style="width: 132px;height: 40px;color: #333;">'+arrList[i].objectid+'</td>'
-      +'<td style="width: 132px;height: 40px;color: #333;">'+arrList[i].bsm+'</td>'
-      +'<td style="width: 132px;height: 40px;color: #333;">'+arrList[i].ysdm+'</td>'
-      +'<td style="width: 132px;height: 40px;color: #333;">'+arrList[i].dlbm+'</td>'
-      +'<td style="width: 132px;height: 40px;color: #333;">'+arrList[i].qsdwdm+'</td>'
-      +'<td style="width: 132px;height: 40px;color: #333;">'+arrList[i].qsdwmc+'</td>'
-      +'<td style="width: 132px;height: 40px;color: #333;">'+arrList[i].tbmj+'</td>'
-      +'<td style="width: 132px;height: 40px;color: #333;">'+arrList[i].czcsxm+'</td>'
-    +"</tr>");         
-  };  
-  }else{
-    $("#tab").innerHtml='无数据'
-  }
-  
-}
+
 $(document).ready(function(){
     dengluLocation();
     huoquName();
@@ -175,12 +143,8 @@ $("#suresearch").click(function(){
   // console.log()
 
 });
-// function changList(arrList){
-//   $('#tab1').empty()
-//   // var arrList = []
-//   document.getElementById("searchmain1").style.display="block";
-//   if(arrList.length>0){
-//     queryDltbByObjectID(data);//权属查询，结果在地图高亮显示，2021年4月16日需求
+
+
 
 //   var xh = 0;
 //   for(var i = 0; i < arrList.length; i++) {
@@ -388,3 +352,31 @@ $("#jlcl").click(function(){  //测量距离
   };
 });
 });
+
+function changList(arrList){
+    $('#tab1').empty()
+    // var arrList = []
+    document.getElementById("searchmain1").style.display="block";
+    if(arrList.length>0){
+        var xh = 0;
+        for(var i = 0; i < arrList.length; i++) {
+            console.log('jjj')
+            xh++;
+            if(!arrList[i].czcsxm){
+                arrList[i].czcsxm = '';
+            }
+            $("#tab1").append("<tr> style=height: 40px;"
+                +'<td style="width: 132px;height: 40px;color: #333;">'+arrList[i].objectid+'</td>'
+                +'<td style="width: 132px;height: 40px;color: #333;">'+arrList[i].bsm+'</td>'
+                +'<td style="width: 132px;height: 40px;color: #333;">'+arrList[i].ysdm+'</td>'
+                +'<td style="width: 132px;height: 40px;color: #333;">'+arrList[i].dlbm+'</td>'
+                +'<td style="width: 132px;height: 40px;color: #333;">'+arrList[i].qsdwdm+'</td>'
+                +'<td style="width: 132px;height: 40px;color: #333;">'+arrList[i].qsdwmc+'</td>'
+                +'<td style="width: 132px;height: 40px;color: #333;">'+arrList[i].tbmj+'</td>'
+                +'<td style="width: 132px;height: 40px;color: #333;">'+arrList[i].czcsxm+'</td>'
+                +"</tr>");
+        };
+    }else{
+        $("#tab").innerHtml='无数据'
+    }
+}

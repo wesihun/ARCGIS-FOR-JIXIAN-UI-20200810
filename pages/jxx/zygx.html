@@ -57,7 +57,8 @@
                     <div class="map_28" title="比例尺"></div>
                     <div class="map_30" title="查看地理信息"></div>
                     <div class="map_07" title="影像"></div>
-                    <div class="map_33" title="显示统计报表"></div>
+                    <div id="isbb" class="map_33" title="显示统计报表"></div>
+                    <div id="isnbb" class="map_3_" title="显示统计报表"></div>
                     <div class="map_09" title="所有地类报表"></div>
                     <div class="map_35" title="选中地类报表"></div>
                     <div class="map_36" title="打印地图"></div>
@@ -67,6 +68,15 @@
                     <div id="isshow1" class="map_42" title="圈地类"></div>
                     <div id="isnshow1" class="map_43" title="圈地类"></div>
                     <!-- <div class="map_38" title='地类面积筛选'></div> -->
+                </div>
+                <div id="buttomone" style="width: 300px;height: 40px;background: #ffffff;position: absolute;left:43% ;top:70px;z-index: 200;border-radius: 4px;">
+                    <form style="margin-left: 20px;" action="#" method="post">
+                     
+                        <input type="radio" name="sex" value="亩" checked="true" />亩
+                        <input  style="margin-left: 20px;" type="radio" name="sex" value="平方米" />平方米
+                        <input  style="margin-left: 20px;" type="radio" name="sex" value="公顷" />公顷
+                        <input  type="button" id="getSexBtn" value="确定" style="height: 40px;background: #04C4DB;width: 60px;margin-left: 31px;color: #FFFFFF;" />
+                    </form>
                 </div>
                 <div id="search" style="position: absolute;left:60% ;top: 100px;z-index: 200;">
                     <input id="inputs" type="text" style="height: 30px;" placeholder="权属单位搜索" >
