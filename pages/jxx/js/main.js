@@ -933,7 +933,7 @@ $('.dcd1,.dcd').on('click',function(){
      $("#getSexBtn").click(function(){
         var unit = $("input[name=sex]:checked").val();
         console.log(unit)
-        exportReportPDF(globalQueryClass.map,unit);   //导出报表按钮
+        exportReportPDF(globalQueryClass.map,null,unit);   //导出报表按钮
 
     });
     //显示区域报表图

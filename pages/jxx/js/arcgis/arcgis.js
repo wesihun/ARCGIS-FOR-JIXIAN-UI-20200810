@@ -442,7 +442,7 @@ function getCountryCode(rightMenue){//获取截取好的行政区码，县级：
 }
 
 
-function exportReportPDF(map, unit, event){//导出报表按钮，根据行政区和地类
+function exportReportPDF(map, event, unit){//导出报表按钮，根据行政区和地类
     if(event == "close") {
         return;
     }
