@@ -442,7 +442,7 @@ function getCountryCode(rightMenue){//获取截取好的行政区码，县级：
 }
 
 
-function exportReportPDF(map, event){//导出报表按钮，根据行政区和地类
+function exportReportPDF(map, event, unit){//导出报表按钮，根据行政区和地类
     if(event == "close") {
         return;
     }
@@ -452,7 +452,7 @@ function exportReportPDF(map, event){//导出报表按钮，根据行政区和�
         return;
     }
 
-    $.ajax({url:GEOSERVER.IP + GEOSERVER.PORT + '/exportReportPDF', type: 'POST', data:{"jsonMenue":JSON.stringify(global_data), "proviceCode":getCountryCode(global_rightMenue), "rightMenueName":global_rightMenue.name, "menuename":global_menue.menuename,'tablename':TB_DLTBPHYSICS.fuPojo.tablename}, xhrFields:{withCredentials:true}, success:function(result) {
+    $.ajax({url:GEOSERVER.IP + GEOSERVER.PORT + '/exportReportPDF', type: 'POST', data:{"jsonMenue":JSON.stringify(global_data), "proviceCode":getCountryCode(global_rightMenue), "rightMenueName":global_rightMenue.name, "menuename":global_menue.menuename,'tablename':TB_DLTBPHYSICS.fuPojo.tablename, 'unit':unit}, xhrFields:{withCredentials:true}, success:function(result) {
 
         var link = document.createElement('a');//下载报表文件
         link.setAttribute("download", "");
