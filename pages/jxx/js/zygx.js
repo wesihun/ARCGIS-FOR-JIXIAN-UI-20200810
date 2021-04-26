@@ -80,7 +80,7 @@ $("#isshow").click(function(){
   document.getElementById("isshow").style.display="none";
   document.getElementById("isnshow").style.display="inline-block";
   document.getElementById("search").style.display="block";
-  document.getElementById("searchmain").style.display="block";
+  // document.getElementById("searchmain").style.display="block";
 })
 
 $("#isnshow").click(function(){
